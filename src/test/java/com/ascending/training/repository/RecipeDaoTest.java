@@ -9,5 +9,6 @@ public class RecipeDaoTest {
         RecipeDao recipeJDBCDao = new RecipeDao();
         assertEquals(0, recipeJDBCDao.getRecipes().size());
         //System.out.println(recipeJDBCDao.getRecipes());
+        assertEquals(6, recipeJDBCDao.getRecipes().size());
     }
 }
