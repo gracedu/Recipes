@@ -1,26 +1,58 @@
 package com.ascending.training.model;
 
 
-import java.util.Date;
+import javax.persistence.*;
+import java.sql.Date;
 
+@Entity
+@Table(name = "recipes")
 public class Recipe {
     public Recipe() {
     }
 
-    private long id;
-    private String name;
-    private Date date;
-    private String ingredient;
-    private String description;
-    private String publisher;
-    private String cuisine;
-
-    public long getId() {
-        return id;
+    public Recipe(long recipeId, String recipeName, Date creationDate, String ingredient, String description, String publisher, String cuisine) {
+        this.recipeId = recipeId;
+        this.recipeName = recipeName;
+        this.creationDate = creationDate;
+        this.ingredient = ingredient;
+        this.description = description;
+        this.publisher = publisher;
+        this.cuisine = cuisine;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public Recipe(String recipeName, String ingredient, String description, String pulisher, String cuisine) {
+
+    }
+    //@Id is primary key
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "recipe_id")
+    private long recipeId;
+
+    @Column(name = "recipe_name")
+    private String recipeName;
+
+    @Column(name = "creation_date")
+    private Date creationDate;
+
+    @Column(name = "ingredient")
+    private String ingredient;
+
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "publisher")
+    private String publisher;
+
+    @Column(name = "cuisine")
+    private String cuisine;
+
+    public long getRecipeId() {
+        return recipeId;
+    }
+
+    public void setRecipeId(long recipeId) {
+        this.recipeId = recipeId;
     }
 
 
@@ -33,20 +65,20 @@ public class Recipe {
     }
 
 
-    public String getName() {
-        return name;
+    public String getRecipeName() {
+        return recipeName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRecipeName(String recipeName) {
+        this.recipeName = recipeName;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getCreationDate() {
+        return creationDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 
     public String getIngredient() {
