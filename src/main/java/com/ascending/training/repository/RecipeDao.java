@@ -1,6 +1,7 @@
 package com.ascending.training.repository;
 
 import com.ascending.training.model.Recipe;
+import com.ascending.training.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,7 +15,42 @@ public class RecipeDao {
     private static final String PASS = "password";
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    //CRUD
+
+    //create a recipe
+    public void createUser(Recipe recipe) {
+        Connection conn = null;
+
+        try {
+            //STEP 2: Open a connection
+            logger.debug("Connecting to database...");
+            conn = DriverManager.getConnection(DBURL, USER, PASS);
+
+            //STEP 3: Execute a query
+            logger.info("Creating statement...");
+
+            String sql;
+            sql = "INSERT INTO recipes (recipe_name, ingredient, description, pulisher, cuisine) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            logger.info("Filling data...");
+            preparedStatement.setString(1, recipe.getRecipeName());
+            preparedStatement.setString(2, recipe.getIngredient());
+            preparedStatement.setString(3, recipe.getDescription());
+            preparedStatement.setString(4, recipe.getPublisher());
+            preparedStatement.setString(5, recipe.getCuisine());
+            preparedStatement.executeUpdate();
+        } catch(SQLException e) {
+            e.printStackTrace();
+            logger.error("error found", e);
+        } finally {
+            try {
+                if(conn != null) conn.close();
+            }
+            catch(SQLException se) {
+                se.printStackTrace();
+            }
+        }
+    }
+
     public List<Recipe> getRecipes() {
         List<Recipe> recipes = new ArrayList();
         Connection conn = null;
@@ -23,31 +59,32 @@ public class RecipeDao {
 
         try {
             //STEP 2: Open a connection
-            logger.debug("open connection...");
+            logger.debug("Connecting to database...");
             conn = DriverManager.getConnection(DBURL, USER, PASS);
 
             //STEP 3: Execute a query
-            logger.info("create statement...");
+            logger.info("Creating statement...");
             stmt = conn.createStatement();
             String sql;
             sql = "SELECT * FROM recipes";
             rs = stmt.executeQuery(sql);
+            logger.info("Converting data...");
             //STEP 4: Extract data from result set
             while(rs.next()) {
-                //Retrieve by column name
-                Long id  = rs.getLong("recipe_id");
-                String name = rs.getString("recipe_name");
+                //Retrieve by column recipe_name
+                Long recipe_id  = rs.getLong("recipe_id");
+                String recipe_name = rs.getString("recipe_name");
                 String description = rs.getString("description");
-                Date date = rs.getDate("creation_date");
+                Date creationDate = rs.getDate("creation_date");
                 String ingredient = rs.getString("ingredient");
                 String publisher = rs.getString("publisher");
                 String cuisine = rs.getString("cuisine");
                 //Fill the object
                 Recipe recipe = new Recipe();
-                recipe.setId(id);
-                recipe.setName(name);
+                recipe.setRecipeId(recipe_id);
+                recipe.setRecipeName(recipe_name);
                 recipe.setDescription(description);
-                recipe.setDate(date);
+                recipe.setCreationDate(creationDate);
                 recipe.setIngredient(ingredient);
                 recipe.setPublisher(publisher);
                 recipe.setCuisine(cuisine);
@@ -56,6 +93,7 @@ public class RecipeDao {
         }
         catch(SQLException e){
             e.printStackTrace();
+            logger.error("error found", e);
         }
         finally {
             //STEP 6: finally block used to close resources
@@ -70,11 +108,7 @@ public class RecipeDao {
         }
         return recipes;
     }
-/*
-    public static void main(String[] args) {
-        RecipeDao recipeJDBCDao = new RecipeDao();
-        System.out.println(recipeJDBCDao.getRecipes());
-    }
 
- */
+
+
 }
