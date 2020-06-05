@@ -1,6 +1,6 @@
-package com.ascending.training.repository;
+package trainingProject.repository;
 
-import com.ascending.training.model.User;
+import trainingProject.model.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

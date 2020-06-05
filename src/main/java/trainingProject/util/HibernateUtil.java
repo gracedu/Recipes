@@ -1,9 +1,8 @@
-package com.ascending.training.util;
+package trainingProject.util;
 
 import com.github.fluent.hibernate.cfg.scanner.EntityScanner;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
@@ -12,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-import java.sql.SQLException;
 import java.util.Properties;
 
 public class HibernateUtil {

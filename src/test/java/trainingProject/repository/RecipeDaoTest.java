@@ -1,4 +1,4 @@
-package com.ascending.training.repository;
+package trainingProject.repository;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.After;

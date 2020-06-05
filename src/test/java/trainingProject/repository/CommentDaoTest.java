@@ -1,4 +1,4 @@
-package com.ascending.training.repository;
+package trainingProject.repository;
 
 import org.junit.After;
 import org.junit.Before;

@@ -1,4 +1,4 @@
-package com.ascending.training;
+package trainingProject;
 
 /**
  * Hello world!

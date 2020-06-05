@@ -1,4 +1,4 @@
-package com.ascending.training.model;
+package trainingProject.model;
 
 public class User {
     private Long userId;

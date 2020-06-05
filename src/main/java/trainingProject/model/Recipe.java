@@ -1,4 +1,4 @@
-package com.ascending.training.model;
+package trainingProject.model;
 
 
 import javax.persistence.*;

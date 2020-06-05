@@ -1,4 +1,4 @@
-package com.ascending.training;
+package trainingProject;
 
 import static org.junit.Assert.assertTrue;
 
