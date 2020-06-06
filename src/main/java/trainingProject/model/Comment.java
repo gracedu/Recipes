@@ -14,14 +14,19 @@ public class Comment {
     @Column(name = "content")
     private String content;
 
-    @Column(name = "id")
-    private Long id;
+    @Column(name = "recipe_id")
+    private Long recipeId;
 
     @Column(name = "user_name")
     private String userName;
 
     @Column(name = "comment_date")
     private Date commentDate;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "comment_id")
+    private Long commentId;
 
     public String getContent() {
         return content;
@@ -31,12 +36,12 @@ public class Comment {
         this.content = content;
     }
 
-    public Long getId() {
-        return id;
+    public Long getRecipeIdId() {
+        return recipeId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setRecipeIdId(Long recipeId) {
+        this.recipeId = recipeId;
     }
 
     public String getUserName() {
@@ -53,6 +58,14 @@ public class Comment {
 
     public void setCommentDate(Date commentDate) {
         this.commentDate = commentDate;
+    }
+
+    public Long getCommentId() {
+        return commentId;
+    }
+
+    public void setCommentId(Long commentId) {
+        this.commentId = commentId;
     }
 
 

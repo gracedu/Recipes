@@ -37,14 +37,16 @@ public class CommentDao {
             //STEP 4: Extract data from result set
             while(rs.next()) {
                 //Retrieve by column name
-                Long id  = rs.getLong("id");
+                Long recipeId  = rs.getLong("recipe_id");
+                Long commentId = rs.getLong("comment_id");
                 String content = rs.getString("content");
                 String userName = rs.getString("user_name");
                 Date commentDate = rs.getDate("comment_date");
 
                 //Fill the object
                 Comment comment = new Comment();
-                comment.setId(id);
+                comment.setRecipeIdId(recipeId);
+                comment.setCommentId(commentId);
                 comment.setContent(content);
                 comment.setUserName(userName);
                 comment.setCommentDate(commentDate);
