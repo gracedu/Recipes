@@ -1,14 +1,26 @@
 package trainingProject.model;
 
 import java.sql.Date;
+import javax.persistence.*;
 
+//persistence object
+
+@Entity
+@Table(name = "comments")
 public class Comment {
     public Comment() {
     }
 
+    @Column(name = "content")
     private String content;
+
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "user_name")
     private String userName;
+
+    @Column(name = "comment_date")
     private Date commentDate;
 
     public String getContent() {

@@ -4,6 +4,8 @@ package trainingProject.model;
 import javax.persistence.*;
 import java.sql.Date;
 
+
+//entity domain model
 @Entity
 @Table(name = "recipes")
 public class Recipe {

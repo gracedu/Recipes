@@ -20,7 +20,7 @@ public class HibernateUtil {
     public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
             try {
-                String[] modelPackages = {"com.ascending.training.model"};
+                String[] modelPackages = {"trainingProject.model"};
                 String dbDriver = System.getProperty("database.driver");
                 String dbDialect = System.getProperty("database.dialect");
                 String dbUrl = System.getProperty("database.url");
@@ -35,10 +35,10 @@ public class HibernateUtil {
                 settings.put(Environment.USER, dbUser);
                 settings.put(Environment.PASS, dbPassword);
                 settings.put(Environment.SHOW_SQL, "true");
-                settings.put(Environment.HBM2DDL_AUTO, "validate"); //validate annotations
+                settings.put(Environment.HBM2DDL_AUTO, "validate"); //validate annotations, do a match
                 settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
                 configuration.setProperties(settings);
-                EntityScanner.scanPackages(modelPackages).addTo(configuration);
+                EntityScanner.scanPackages(modelPackages).addTo(configuration); //add class to map
                 StandardServiceRegistryBuilder registryBuilder = new StandardServiceRegistryBuilder();
                 ServiceRegistry serviceRegistry = registryBuilder.applySettings(configuration.getProperties()).build();
                 sessionFactory = configuration.buildSessionFactory(serviceRegistry);
