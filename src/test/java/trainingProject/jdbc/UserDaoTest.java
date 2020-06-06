@@ -1,4 +1,4 @@
-package trainingProject.repository;
+package trainingProject.jdbc;
 
 import trainingProject.model.User;
 import org.junit.After;

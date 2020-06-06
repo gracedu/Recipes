@@ -1,4 +1,4 @@
-package trainingProject.repository;
+package trainingProject.jdbc;
 
 import trainingProject.model.Comment;
 import org.slf4j.Logger;
