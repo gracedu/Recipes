@@ -1,0 +1,3 @@
+ALTER TABLE comments RENAME COLUMN id TO recipe_id;
+
+ALTER TABLE comments ADD COLUMN comment_id BIGSERIAL PRIMARY KEY;
