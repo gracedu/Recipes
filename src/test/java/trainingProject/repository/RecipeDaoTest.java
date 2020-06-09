@@ -21,6 +21,8 @@ public class RecipeDaoTest {
         recipe1.setIngredient("parsely, chicken, salt, pepper");
         recipe1.setPublisher("dimitria");
         recipe1.setRecipeName("Greek style roast chicken");
+        //recipe1.setRecipeId(1);
+        recipe1 = recipeDao.save(recipe1);
 
     }
 

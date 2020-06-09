@@ -18,7 +18,7 @@ public class RecipeDaoImpl implements RecipeDao {
 
     @Override
     public Recipe save(Recipe recipe) {
-        Transaction transaction = null;
+        Transaction transaction = null;  //transaction for DAO
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
         try {
@@ -38,7 +38,7 @@ public class RecipeDaoImpl implements RecipeDao {
 
     @Override
     public List<Recipe> getRecipes() {
-        String hql = "FROM Recipe";
+        String hql = "FROM Recipe"; //SELECT r FROM Recipe r
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session s = sessionFactory.openSession();
         List<Recipe> result = new ArrayList<>();
@@ -60,7 +60,7 @@ public class RecipeDaoImpl implements RecipeDao {
 
     @Override
     public boolean delete(Recipe recipe) {
-        String hql = "DELETE Recipe as rec where rec.id = :Id";
+        String hql = "DELETE Recipe as rec where rec.recipeId = :Id"; //:Id is a placeholder
         int deletedCount = 0;
         Transaction transaction = null;
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();

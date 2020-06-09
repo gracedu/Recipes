@@ -11,7 +11,7 @@ import java.sql.Date;
 public class Recipe {
     public Recipe() {
     }
-
+/*
     public Recipe(long recipeId, String recipeName, Date creationDate, String ingredient, String description, String publisher, String cuisine) {
         this.recipeId = recipeId;
         this.recipeName = recipeName;
@@ -24,7 +24,8 @@ public class Recipe {
 
     public Recipe(String recipeName, String ingredient, String description, String pulisher, String cuisine) {
 
-    }
+    }*/
+
     //@Id is primary key
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
