@@ -36,11 +36,11 @@ public class Comment {
         this.content = content;
     }
 
-    public Long getRecipeIdId() {
+    public Long getRecipeId() {
         return recipeId;
     }
 
-    public void setRecipeIdId(Long recipeId) {
+    public void setRecipeId(Long recipeId) {
         this.recipeId = recipeId;
     }
 

@@ -28,7 +28,8 @@ public class RecipeDaoImpl implements RecipeDao {
             session.close();
             return recipe;
 
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             if (transaction != null) transaction.rollback();
             logger.error("failure to insert record", e);
             session.close();
@@ -46,8 +47,9 @@ public class RecipeDaoImpl implements RecipeDao {
             Query query = s.createQuery(hql);
             result = query.list();
             s.close();
-        } catch (HibernateException e) {
-            logger.error("session close exception, try again", e);
+        }
+        catch (HibernateException e) {
+            logger.error("failure to retrieve data record", e);
             s.close();
         }
         return result;
@@ -73,7 +75,8 @@ public class RecipeDaoImpl implements RecipeDao {
             transaction.commit();
             session.close();
             return deletedCount >= 1 ? true : false;
-        } catch (HibernateException e) {
+        }
+        catch (HibernateException e) {
             if (transaction != null) transaction.rollback();
             session.close();
             logger.error("unable to delete record", e);
