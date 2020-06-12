@@ -18,8 +18,8 @@ public class User {
 //  @Column(name = "user_id")
     private Long id;
 
-    @Column(name = "user_name")
-    private String userName;
+    @Column(name = "name")
+    private String name;
 
     @Column(name = "email")
     private String email;
@@ -30,8 +30,8 @@ public class User {
     public User() {
     }
 
-    public User(String userName,String email, String password) {
-        this.userName = userName;
+    public User(String name, String email, String password) {
+        this.name = name;
         this.email = email;
         this.password = password;
     }
@@ -40,14 +40,12 @@ public class User {
         return id;
     }
 
-
-
-    public String getUserName() {
-        return userName;
+    public String getName() {
+        return name;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {

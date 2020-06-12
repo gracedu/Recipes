@@ -61,7 +61,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean delete(User user) {
-        String hql = "DELETE FROM User WHERE userId = :Id";
+        String hql = "DELETE FROM User WHERE id = :Id";
         int deletedCount = 0;
         Transaction transaction = null;
         Session session = HibernateUtil.getSessionFactory().openSession();

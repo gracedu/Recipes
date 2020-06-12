@@ -20,7 +20,7 @@ public class RecipeDaoTest {
         recipe1.setDescription("roast chicken in the oven");
         recipe1.setIngredient("parsely, chicken, salt, pepper");
      //   recipe1.setPublisher("dimitria"); //this is a foreign key reference(user.user_name), will have a problem if run test
-        recipe1.setRecipeName("Greek style roast chicken");
+        recipe1.setName("Greek style roast chicken");
         //recipe1.setRecipeId(1);
         recipe1 = recipeDao.save(recipe1);
 

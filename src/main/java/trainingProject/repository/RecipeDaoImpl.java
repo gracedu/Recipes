@@ -62,7 +62,7 @@ public class RecipeDaoImpl implements RecipeDao {
 
     @Override
     public boolean delete(Recipe recipe) {
-        String hql = "DELETE Recipe as rec where rec.recipeId = :Id"; //:Id is a placeholder
+        String hql = "DELETE Recipe as rec where rec.id = :Id"; //:Id is a placeholder
         int deletedCount = 0;
         Transaction transaction = null;
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();

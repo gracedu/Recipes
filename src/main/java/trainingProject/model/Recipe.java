@@ -3,6 +3,7 @@ package trainingProject.model;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Set;
 
 
 //entity,domain,model
@@ -11,20 +12,19 @@ import java.sql.Date;
 public class Recipe {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "publisher")
+    @JoinColumn(name = "user_id")
     private User user;
 
-  //  @OneToMany(mappedBy = "recipe", cascade = CascadeType.REMOVE,fetch = FetchType.LAZY)
-  //  private Set<Comment> comments;
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.REMOVE,fetch = FetchType.LAZY)
+    private Set<Comment> comments;
 
     //@Id is primary key
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "recipe_id")
     private long id;
 
-    @Column(name = "recipe_name")
-    private String recipeName;
+    @Column(name = "name")
+    private String name;
 
     @Column(name = "creation_date")
     private Date creationDate;
@@ -57,12 +57,12 @@ public class Recipe {
     }
 
 
-    public String getRecipeName() {
-        return recipeName;
+    public String getName() {
+        return name;
     }
 
-    public void setRecipeName(String recipeName) {
-        this.recipeName = recipeName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Date getCreationDate() {

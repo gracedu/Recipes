@@ -19,11 +19,11 @@ public class UserDaoTest {
     public void init() {
         userDao = new UserDaoImpl(); //new user
         user = new User();
-        user.setUserName("graceeeedu");
+        user.setName("graceeeedu");
         user.setEmail("gracedjx@gmail.com");
         user.setPassword("1234");
         userDao.save(user);
-/*
+
         recipeDao = new RecipeDaoImpl();
         recipe1 = new Recipe();
 
@@ -33,8 +33,8 @@ public class UserDaoTest {
         recipe1.setDescription("roast chicken in the oven");
         recipe1.setIngredient("parsely, chicken, salt, pepper");
         //   recipe1.setPublisher("dimitria");
-        recipe1.setRecipeName("Greek style roast chicken");
-        recipe1.setPublisher(user);
+        recipe1.setName("Greek style roast chicken");
+        recipe1.setUser(user);
         recipeDao.save(recipe1);
 
         recipe2 = new Recipe(); // new recipe
@@ -43,22 +43,22 @@ public class UserDaoTest {
         recipe2.setDescription("roast chicken in the oven");
         recipe2.setIngredient("parsely, chicken, salt, pepper");
         //   recipe1.setPublisher("dimitria");
-        recipe2.setRecipeName("Greek style roast chicken");
-        recipe2.setPublisher(user);
+        recipe2.setName("Greek style roast chicken");
+        recipe2.setUser(user);
         recipeDao.save(recipe2);
-        */
+
 
     }
 
     @After
     public void tearDown() {
-      //  recipeDao.delete(recipe1);
-      //  recipeDao.delete(recipe2);
+        recipeDao.delete(recipe1);
+        recipeDao.delete(recipe2);
         userDao.delete(user);
     }
 
     @Test
     public void getUsersTest() {
-        Assert.assertEquals(2, userDao.getUsers().size());
+        Assert.assertEquals(1, userDao.getUsers().size());
     }
 }
