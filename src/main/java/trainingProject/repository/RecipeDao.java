@@ -10,5 +10,6 @@ public interface RecipeDao {
     Recipe getBy(Long recipeId);
     boolean delete(Recipe recipe);
     //List<Recipe> getRecipesEager();
+    Recipe getRecipeEagerBy(Long id);
 
 }

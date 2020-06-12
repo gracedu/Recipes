@@ -23,3 +23,4 @@ CREATE TABLE comments (
 	user_name varchar REFERENCES users(user_name),
 	comment_date date default CURRENT_DATE
 );
+

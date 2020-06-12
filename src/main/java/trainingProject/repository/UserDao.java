@@ -9,4 +9,5 @@ public interface UserDao {
     List<User> getUsers();
     User getBy(Long userId);
     boolean delete(User user);
+    User getUserEagerBy(Long id);
 }

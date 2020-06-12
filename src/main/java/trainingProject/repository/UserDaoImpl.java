@@ -61,7 +61,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean delete(User user) {
-        String hql = "DELETE FROM User as u WHERE u.userId = :Id";
+        String hql = "DELETE FROM User WHERE userId = :Id";
         int deletedCount = 0;
         Transaction transaction = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -80,5 +80,10 @@ public class UserDaoImpl implements UserDao {
             logger.error("unable to delete record", e);
         }
         return false;
+    }
+
+    @Override
+    public User getUserEagerBy(Long id) {
+        return null;
     }
 }

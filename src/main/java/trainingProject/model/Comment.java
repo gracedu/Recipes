@@ -8,25 +8,36 @@ import javax.persistence.*;
 @Entity
 @Table(name = "comments")
 public class Comment {
-    public Comment() {
-    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "recipe_id")
+    private Recipe recipe;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //  @Column(name = "comment_id")
+    private Long id;
 
     @Column(name = "content")
     private String content;
 
-    @Column(name = "recipe_id")
-    private Long recipeId;
+//@Column(name = "recipe_id")
+//private Long recipeId;
 
-    @Column(name = "user_name")
-    private String userName;
+//@Column(name = "user_name")
+//private String userName;
 
     @Column(name = "comment_date")
     private Date commentDate;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "comment_id")
-    private Long commentId;
+
+
+    public Comment() {
+    }
 
     public String getContent() {
         return content;
@@ -35,10 +46,10 @@ public class Comment {
     public void setContent(String content) {
         this.content = content;
     }
-
+    /*
     public Long getRecipeId() {
-        return recipeId;
-    }
+       return recipeId;
+   }
 
     public void setRecipeId(Long recipeId) {
         this.recipeId = recipeId;
@@ -51,7 +62,7 @@ public class Comment {
     public void setUserName(String userName) {
         this.userName = userName;
     }
-
+    */
     public Date getCommentDate() {
         return commentDate;
     }
@@ -60,12 +71,12 @@ public class Comment {
         this.commentDate = commentDate;
     }
 
-    public Long getCommentId() {
-        return commentId;
+    public Long getId() {
+        return id;
     }
 
-    public void setCommentId(Long commentId) {
-        this.commentId = commentId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
 

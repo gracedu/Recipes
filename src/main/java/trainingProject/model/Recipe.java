@@ -5,32 +5,23 @@ import javax.persistence.*;
 import java.sql.Date;
 
 
-//entity domain model
+//entity,domain,model
 @Entity
 @Table(name = "recipes")
 public class Recipe {
-    public Recipe() {
-    }
-/*
-    public Recipe(long recipeId, String recipeName, Date creationDate, String ingredient, String description, String publisher, String cuisine) {
-        this.recipeId = recipeId;
-        this.recipeName = recipeName;
-        this.creationDate = creationDate;
-        this.ingredient = ingredient;
-        this.description = description;
-        this.publisher = publisher;
-        this.cuisine = cuisine;
-    }
 
-    public Recipe(String recipeName, String ingredient, String description, String pulisher, String cuisine) {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "publisher")
+    private User user;
 
-    }*/
+  //  @OneToMany(mappedBy = "recipe", cascade = CascadeType.REMOVE,fetch = FetchType.LAZY)
+  //  private Set<Comment> comments;
 
     //@Id is primary key
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "recipe_id")
-    private long recipeId;
+    private long id;
 
     @Column(name = "recipe_name")
     private String recipeName;
@@ -44,20 +35,18 @@ public class Recipe {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "publisher")
-    private String publisher;
+   // @Column(name = "publisher")
+   // private String publisher;
 
     @Column(name = "cuisine")
     private String cuisine;
 
-    public long getRecipeId() {
-        return recipeId;
+    public Recipe() {
     }
 
-    public void setRecipeId(long recipeId) {
-        this.recipeId = recipeId;
+    public long getId() {
+        return id;
     }
-
 
     public String getDescription() {
         return description;
@@ -93,13 +82,13 @@ public class Recipe {
     }
 
 
-    public String getPublisher() {
-        return publisher;
-    }
+  //  public String getPublisher() {
+  //      return publisher;
+   // }
 
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
-    }
+  //  public void setPublisher(String publisher) {
+   //     this.publisher = publisher;
+  //  }
 
     public String getCuisine() {
         return cuisine;
@@ -107,6 +96,14 @@ public class Recipe {
 
     public void setCuisine(String cuisine) {
         this.cuisine = cuisine;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
 

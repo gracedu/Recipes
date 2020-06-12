@@ -1,15 +1,22 @@
 package trainingProject.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
 public class User {
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY) //user is a variable name
+    private Set<Recipe> recipes;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private Set<Comment> comments;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
-    private Long userId;
+//  @Column(name = "user_id")
+    private Long id;
 
     @Column(name = "user_name")
     private String userName;
@@ -30,12 +37,10 @@ public class User {
     }
 
     public Long getUserId() {
-        return userId;
+        return id;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
+
 
     public String getUserName() {
         return userName;

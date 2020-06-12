@@ -70,7 +70,7 @@ public class RecipeDaoImpl implements RecipeDao {
         try {
             transaction = session.beginTransaction();
             Query<Recipe> query = session.createQuery(hql);
-            query.setParameter("Id", recipe.getRecipeId());
+            query.setParameter("Id", recipe.getId());
             deletedCount = query.executeUpdate();
             transaction.commit();
             session.close();
@@ -82,5 +82,12 @@ public class RecipeDaoImpl implements RecipeDao {
             logger.error("unable to delete record", e);
         }
         return false;
+    }
+
+    @Override
+    public Recipe getRecipeEagerBy(Long id) {
+        String hql = "";
+        return null;
+
     }
 }

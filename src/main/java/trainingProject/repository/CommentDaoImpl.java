@@ -67,7 +67,7 @@ public class CommentDaoImpl implements CommentDao {
         try {
             transaction = session.beginTransaction();
             Query<Comment> query = session.createQuery(hql);
-            query.setParameter("Id", comment.getCommentId());
+            query.setParameter("Id", comment.getId());
             deletedCount = query.executeUpdate();
             transaction.commit();
             session.close();
@@ -81,5 +81,10 @@ public class CommentDaoImpl implements CommentDao {
             logger.error("unable to delete record", e);
         }
         return false;
+    }
+
+    @Override
+    public Comment getCommentEagerBy(Long id) {
+        return null;
     }
 }
