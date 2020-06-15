@@ -56,5 +56,12 @@ public class Comment {
         return id;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
+    }
 
 }

@@ -60,7 +60,7 @@ public class CommentDaoImpl implements CommentDao {
 
     @Override
     public boolean delete(Comment comment) {
-        String hql = "DELETE Comment as com WHERE com.commentId = :Id ";
+        String hql = "DELETE Comment as com WHERE com.id = :Id ";
         Transaction transaction = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         int deletedCount = 0;

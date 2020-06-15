@@ -93,9 +93,10 @@ public class UserDaoImpl implements UserDao {
         return false;
     }
 
+    //based on table recipes(user_id), return the user who publishes the recipe
     @Override
     public User getUserEagerBy(Long id) {
-        String hql = "FROM User u LEFT JOIN FETCH u.recipes where u.id = :Id"; //WHAT IF there is another mapping in user?
+        String hql = "FROM User u LEFT JOIN FETCH u.recipes where u.id = :Id";
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             Query<User> query = session.createQuery(hql);
@@ -103,8 +104,28 @@ public class UserDaoImpl implements UserDao {
             User result = query.uniqueResult();
             session.close();
             return result;
-        } catch (HibernateException e) {
+        }
+        catch (HibernateException e) {
             logger.error("failure to retrieve data record", e);
+            session.close();
+            return null;
+        }
+    }
+
+    //based on table comments(user_id), return the user who publishes the comment
+    @Override
+    public User getUserEagerByComment(Long id) {
+        String hql = "FROM User u LEFT JOIN FETCH u.comments where u.id = :Id";
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            Query<User> query = session.createQuery(hql);
+            query.setParameter("Id", id);
+            User result = query.uniqueResult();
+            session.close();
+            return result;
+        }
+        catch (HibernateException e) {
+            logger.error("fail to retrieve data", e);
             session.close();
             return null;
         }

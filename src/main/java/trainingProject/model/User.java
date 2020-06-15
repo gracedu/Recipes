@@ -69,4 +69,8 @@ public class User {
     public Set<Recipe> getRecipes() {
         return recipes;
     }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
 }
