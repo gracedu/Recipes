@@ -1,7 +1,6 @@
 package trainingProject.repository;
 
 import org.hibernate.HibernateException;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -55,8 +54,20 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User getBy(Long userId) {
-        return null;
+    public User getBy(Long id) {
+        String hql = "FROM User u where u.id = :Id";
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            Query<User> query = session.createQuery(hql);
+            query.setParameter("Id", id);
+            User result = query.uniqueResult();
+            session.close();
+            return result;
+        } catch (HibernateException e) {
+            logger.error("failure to retrieve data record",e);
+            session.close();
+            return null;
+        }
     }
 
     @Override
@@ -68,7 +79,7 @@ public class UserDaoImpl implements UserDao {
         try {
             transaction = session.beginTransaction();
             Query<User> query = session.createQuery(hql);
-            query.setParameter("Id", user.getUserId());
+            query.setParameter("Id", user.getId());
             deletedCount = query.executeUpdate();
             transaction.commit();
             session.close();
@@ -84,6 +95,18 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User getUserEagerBy(Long id) {
-        return null;
+        String hql = "FROM User u LEFT JOIN FETCH u.recipes where u.id = :Id"; //WHAT IF there is another mapping in user?
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            Query<User> query = session.createQuery(hql);
+            query.setParameter("Id", id);
+            User result = query.uniqueResult();
+            session.close();
+            return result;
+        } catch (HibernateException e) {
+            logger.error("failure to retrieve data record", e);
+            session.close();
+            return null;
+        }
     }
 }

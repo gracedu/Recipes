@@ -32,7 +32,6 @@ public class UserDaoTest {
         recipe1.setCuisine("Greek");
         recipe1.setDescription("roast chicken in the oven");
         recipe1.setIngredient("parsely, chicken, salt, pepper");
-        //   recipe1.setPublisher("dimitria");
         recipe1.setName("Greek style roast chicken");
         recipe1.setUser(user);
         recipeDao.save(recipe1);
@@ -42,7 +41,6 @@ public class UserDaoTest {
         recipe2.setCuisine("Greek");
         recipe2.setDescription("roast chicken in the oven");
         recipe2.setIngredient("parsely, chicken, salt, pepper");
-        //   recipe1.setPublisher("dimitria");
         recipe2.setName("Greek style roast chicken");
         recipe2.setUser(user);
         recipeDao.save(recipe2);
@@ -60,5 +58,14 @@ public class UserDaoTest {
     @Test
     public void getUsersTest() {
         Assert.assertEquals(1, userDao.getUsers().size());
+    }
+
+    @Test
+    public void getUserEagerByTest() {
+        User userResult = userDao.getUserEagerBy(user.getId());
+        Assert.assertNotNull(userResult);
+        Assert.assertEquals(userResult.getName(), user.getName());
+        Assert.assertTrue(userResult.getRecipes().size() > 0);
+
     }
 }

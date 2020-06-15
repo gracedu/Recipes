@@ -82,14 +82,6 @@ public class Recipe {
     }
 
 
-  //  public String getPublisher() {
-  //      return publisher;
-   // }
-
-  //  public void setPublisher(String publisher) {
-   //     this.publisher = publisher;
-  //  }
-
     public String getCuisine() {
         return cuisine;
     }

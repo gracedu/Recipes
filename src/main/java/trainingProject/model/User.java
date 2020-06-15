@@ -1,6 +1,7 @@
 package trainingProject.model;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -36,7 +37,7 @@ public class User {
         this.password = password;
     }
 
-    public Long getUserId() {
+    public Long getId() {
         return id;
     }
 
@@ -65,5 +66,7 @@ public class User {
     }
 
 
-
+    public Set<Recipe> getRecipes() {
+        return recipes;
+    }
 }
