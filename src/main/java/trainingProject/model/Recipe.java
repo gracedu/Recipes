@@ -98,7 +98,9 @@ public class Recipe {
         this.user = user;
     }
 
-
+    public Set<Comment> getComments() {
+        return comments;
+    }
 
 
 }

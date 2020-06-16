@@ -8,10 +8,12 @@ import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import trainingProject.model.Recipe;
+import trainingProject.model.User;
 import trainingProject.util.HibernateUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class RecipeDaoImpl implements RecipeDao {
     private Logger logger = LoggerFactory.getLogger(getClass());
@@ -56,8 +58,20 @@ public class RecipeDaoImpl implements RecipeDao {
     }
 
     @Override
-    public Recipe getBy(Long recipeId) {
-        return null;
+    public Recipe getBy(Long id) {
+        String hql = "FROM Recipe r where r.id = :Id";
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            Query<Recipe> query = session.createQuery(hql);
+            query.setParameter("Id", id);
+            Recipe result = query.uniqueResult();
+            session.close();
+            return result;
+        } catch (HibernateException e) {
+            logger.error("failure to retrieve data record",e);
+            session.close();
+            return null;
+        }
     }
 
     @Override
@@ -84,10 +98,23 @@ public class RecipeDaoImpl implements RecipeDao {
         return false;
     }
 
+    // get the recipe that the comment is for, might not be necessary!
     @Override
     public Recipe getRecipeEagerBy(Long id) {
-        String hql = "";
-        return null;
+        String hql = "From Recipe r LEFT JOIN FETCH r.comments WHERE r.id = :Id";
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            Query<Recipe> query = session.createQuery(hql);
+            query.setParameter("Id", id);
+            Recipe result = query.uniqueResult();
+            session.close();
+            return result;
+        }
+        catch (HibernateException e) {
+            logger.error("failure to retrieve data record", e);
+            session.close();
+            return null;
+        }
 
     }
 }

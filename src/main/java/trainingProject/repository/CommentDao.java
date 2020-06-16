@@ -10,5 +10,6 @@ public interface CommentDao {
     List<Comment> getComments();
     Comment getBy(Long commentId);
     boolean delete(Comment comment);
-    Comment getCommentEagerBy(Long id);
+    Comment getCommentEagerByRecipe(Long id);
+    Comment getCommentByUser(Long id); //TODO where shoud it be
 }

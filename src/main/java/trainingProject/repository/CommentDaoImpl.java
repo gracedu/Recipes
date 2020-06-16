@@ -84,7 +84,13 @@ public class CommentDaoImpl implements CommentDao {
     }
 
     @Override
-    public Comment getCommentEagerBy(Long id) {
+    public Comment getCommentEagerByRecipe(Long id) {
         return null;
     }
+
+    @Override
+    public Comment getCommentByUser(Long id) {
+        return null;
+    }
+
 }
