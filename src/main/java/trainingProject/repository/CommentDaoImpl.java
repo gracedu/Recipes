@@ -6,12 +6,16 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 import trainingProject.model.Comment;
+import trainingProject.model.Recipe;
+import trainingProject.model.User;
 import trainingProject.util.HibernateUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class CommentDaoImpl implements CommentDao {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -54,8 +58,20 @@ public class CommentDaoImpl implements CommentDao {
     }
 
     @Override
-    public Comment getBy(Long commentId) {
-        return null;
+    public Comment getBy(Long id) {
+        String hql = "FROM Comment c where c.id = :Id";
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            Query<Comment> query = session.createQuery(hql);
+            query.setParameter("Id", id);
+            Comment result = query.uniqueResult();
+            session.close();
+            return result;
+        } catch (HibernateException e) {
+            logger.error("failure to retrieve data record",e);
+            session.close();
+            return null;
+        }
     }
 
     @Override
@@ -83,14 +99,41 @@ public class CommentDaoImpl implements CommentDao {
         return false;
     }
 
+    //select * from comments as c left join recipes as r on r.id = ?
     @Override
-    public Comment getCommentEagerByRecipe(Long id) {
-        return null;
+    public List<Comment> getBy(Recipe recipe) {
+        String hql = "From Comment as c LEFT JOIN FETCH c.recipe as r where r.id = :Id";
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            Query<Comment> query = session.createQuery(hql);
+            query.setParameter("Id", recipe.getId());
+            List<Comment> result = query.list();
+            session.close();
+            return result;
+        }
+        catch (HibernateException e) {
+            logger.error("fail to retrieve data", e);
+            session.close();
+            return null;
+        }
     }
 
     @Override
-    public Comment getCommentByUser(Long id) {
-        return null;
+    public List<Comment> getBy(User user) {
+        String hql = "From Comment as c LEFT JOIN FETCH c.user as u where u.id = :Id";
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            Query<Comment> query = session.createQuery(hql);
+            query.setParameter("Id", user.getId());
+            List<Comment> result = query.list();
+            session.close();
+            return result;
+        }
+        catch (HibernateException e) {
+            logger.error("fail to retrieve data", e);
+            session.close();
+            return null;
+        }
     }
 
 }

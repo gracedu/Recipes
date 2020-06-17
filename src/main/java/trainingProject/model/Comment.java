@@ -24,11 +24,6 @@ public class Comment {
     @Column(name = "content")
     private String content;
 
-//@Column(name = "recipe_id")
-//private Long recipeId;
-
-//@Column(name = "user_name")
-//private String userName;
 
     @Column(name = "comment_date")
     private Date commentDate;

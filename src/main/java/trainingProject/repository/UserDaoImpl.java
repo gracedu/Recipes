@@ -6,12 +6,14 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 import trainingProject.model.User;
 import trainingProject.util.HibernateUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class UserDaoImpl implements UserDao {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -94,8 +96,9 @@ public class UserDaoImpl implements UserDao {
     }
 
     //based on table recipes(user_id), return the user who publishes the recipe
+    //select * from users as u left join recipes as r on u.id = r.user_id
     @Override
-    public User getUserEagerBy(Long id) {
+    public User getUserEagerByRecipe(Long id) {
         String hql = "FROM User u LEFT JOIN FETCH u.recipes where u.id = :Id";
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {

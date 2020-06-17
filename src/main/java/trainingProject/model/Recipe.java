@@ -15,7 +15,7 @@ public class Recipe {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy = "recipe", cascade = CascadeType.REMOVE,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Comment> comments;
 
     //@Id is primary key

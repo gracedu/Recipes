@@ -1,5 +1,6 @@
 package trainingProject.repository;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -9,6 +10,7 @@ import trainingProject.model.Recipe;
 import trainingProject.model.User;
 
 import java.util.Calendar;
+import java.util.List;
 
 public class RecipeDaoTest {
     private RecipeDao recipeDao;
@@ -73,11 +75,18 @@ public class RecipeDaoTest {
     }
 
     @Test
-    public void getRecipeEagerByTest() {
-        Recipe recipeResult = recipeDao.getRecipeEagerBy(recipe1.getId());
+    public void getRecipeEagerByCommentTest() {
+        Recipe recipeResult = recipeDao.getRecipeEagerByComment(recipe1.getId());
         Assert.assertNotNull(recipeResult);
         Assert.assertEquals(recipeResult.getName(), recipe1.getName());
         Assert.assertTrue(recipeResult.getComments().size() > 0);
+    }
+
+    @Test
+    public void getByUserTest() {
+        List<Recipe> recipeResult = recipeDao.getBy(user1);
+        Assert.assertNotNull(recipeResult);
+        Assert.assertEquals(1, recipeResult.size());
     }
 
 }

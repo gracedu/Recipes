@@ -4,34 +4,48 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import trainingProject.ApplicationBootstrap;
 import trainingProject.model.Comment;
 import trainingProject.model.Recipe;
 import trainingProject.model.User;
 
 import java.util.Calendar;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes= ApplicationBootstrap.class)
 public class UserDaoTest {
+    @Autowired
     private UserDao userDao;
+
     private User user;
+
+    @Autowired
     private RecipeDao recipeDao;
+
     private Recipe recipe1;
     private Recipe recipe2;
+
+    @Autowired
     private CommentDao commentDao;
+
     private Comment comment1;
     private Comment comment2;
 
 
     @Before
     public void init() {
-        userDao = new UserDaoImpl(); //new user
+       // userDao = new UserDaoImpl(); //new user
         user = new User();
         user.setName("graceeeedu");
         user.setEmail("gracedjx@gmail.com");
         user.setPassword("1234");
         userDao.save(user);
 
-        recipeDao = new RecipeDaoImpl();
-        recipe1 = new Recipe();
+     //   recipeDao = new RecipeDaoImpl();
 
         recipe1 = new Recipe();
         recipe1.setCreationDate(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
@@ -51,7 +65,7 @@ public class UserDaoTest {
         recipe2.setUser(user);
         recipeDao.save(recipe2);
 
-        commentDao = new CommentDaoImpl();
+     //   commentDao = new CommentDaoImpl();
 
         comment1 = new Comment();
         comment1.setContent("It's good");
@@ -87,9 +101,10 @@ public class UserDaoTest {
         Assert.assertEquals(1, userDao.getUsers().size());
     }
 
+
     @Test
-    public void getUserEagerByTest() { //based on table recipes(user_id)
-        User userResult = userDao.getUserEagerBy(user.getId());
+    public void getUserEagerByRecipeTest() { //based on table recipes(user_id)
+        User userResult = userDao.getUserEagerByRecipe(user.getId());
         Assert.assertNotNull(userResult);
         Assert.assertEquals(userResult.getName(), user.getName());
         Assert.assertTrue(userResult.getRecipes().size() > 0);

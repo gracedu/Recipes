@@ -9,6 +9,6 @@ public interface UserDao {
     List<User> getUsers();
     User getBy(Long id);
     boolean delete(User user);
-    User getUserEagerBy(Long id);//based on table recipes(user_id)
+    User getUserEagerByRecipe(Long id);//based on table recipes(user_id)
     User getUserEagerByComment(Long id); //based on table comments(user_id)
 }

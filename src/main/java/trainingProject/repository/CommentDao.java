@@ -2,14 +2,15 @@ package trainingProject.repository;
 
 import trainingProject.model.Comment;
 import trainingProject.model.Recipe;
+import trainingProject.model.User;
 
 import java.util.List;
 
 public interface CommentDao {
     Comment save(Comment comment);
     List<Comment> getComments();
-    Comment getBy(Long commentId);
+    Comment getBy(Long id);
     boolean delete(Comment comment);
-    Comment getCommentEagerByRecipe(Long id);
-    Comment getCommentByUser(Long id); //TODO where shoud it be
+    List<Comment> getBy(Recipe recipe);
+    List<Comment> getBy(User user);
 }

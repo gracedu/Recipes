@@ -7,6 +7,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 import trainingProject.model.Recipe;
 import trainingProject.model.User;
 import trainingProject.util.HibernateUtil;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+@Repository
 public class RecipeDaoImpl implements RecipeDao {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -100,7 +102,7 @@ public class RecipeDaoImpl implements RecipeDao {
 
     // get the recipe that the comment is for, might not be necessary!
     @Override
-    public Recipe getRecipeEagerBy(Long id) {
+    public Recipe getRecipeEagerByComment(Long id) {
         String hql = "From Recipe r LEFT JOIN FETCH r.comments WHERE r.id = :Id";
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
@@ -116,5 +118,23 @@ public class RecipeDaoImpl implements RecipeDao {
             return null;
         }
 
+    }
+
+    @Override
+    public List<Recipe> getBy(User user) {
+        String hql = "FROM Recipe r LEFT JOIN FETCH r.user as u WHERE u.id = :Id";
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            Query<Recipe> query = session.createQuery(hql);
+            query.setParameter("Id", user.getId());
+            List<Recipe> result = query.list();
+            session.close();
+            return result;
+        }
+        catch (HibernateException e) {
+            logger.error("failure to retrieve data record", e);
+            session.close();
+            return null;
+        }
     }
 }
