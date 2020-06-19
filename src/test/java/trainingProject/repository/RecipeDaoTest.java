@@ -5,6 +5,11 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import trainingProject.ApplicationBootstrap;
 import trainingProject.model.Comment;
 import trainingProject.model.Recipe;
 import trainingProject.model.User;
@@ -12,20 +17,25 @@ import trainingProject.model.User;
 import java.util.Calendar;
 import java.util.List;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes= ApplicationBootstrap.class)
 public class RecipeDaoTest {
+    @Autowired
     private RecipeDao recipeDao;
     private Recipe recipe1;
 
+    @Autowired
     private CommentDao commentDao;
     private Comment comment;
 
+    @Autowired
     private UserDao userDao;
     private User user1;
     private User user2;
 
     @Before
     public void setUp() {
-        userDao = new UserDaoImpl();
+        //userDao = new UserDaoImpl();
         user1 = new User();
         user1.setEmail("Hulu@gmail.com");
         user1.setPassword("1234");
@@ -34,7 +44,7 @@ public class RecipeDaoTest {
         user2 = new User("Golds", "golds@gmail.com", "haha");
         userDao.save(user2);
 
-        recipeDao = new RecipeDaoImpl();
+        //recipeDao = new RecipeDaoImpl();
         recipe1 = new Recipe();
         recipe1.setCreationDate(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
         recipe1.setCuisine("Greek");
@@ -44,7 +54,7 @@ public class RecipeDaoTest {
         recipe1.setUser(user1);
         recipeDao.save(recipe1);
 
-        commentDao = new CommentDaoImpl();
+        //commentDao = new CommentDaoImpl();
         comment = new Comment();
         comment.setRecipe(recipe1);
         comment.setUser(user2);

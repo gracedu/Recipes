@@ -20,18 +20,15 @@ import java.util.Calendar;
 public class UserDaoTest {
     @Autowired
     private UserDao userDao;
-
     private User user;
 
     @Autowired
     private RecipeDao recipeDao;
-
     private Recipe recipe1;
     private Recipe recipe2;
 
     @Autowired
     private CommentDao commentDao;
-
     private Comment comment1;
     private Comment comment2;
 

@@ -3,6 +3,7 @@ package trainingProject.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import trainingProject.model.Recipe;
+import trainingProject.model.User;
 import trainingProject.repository.RecipeDao;
 
 import java.util.List;
@@ -26,5 +27,12 @@ public class RecipeService {
 
     public boolean delete(Recipe recipe) {
         return recipeDao.delete(recipe);
+    }
+
+    public Recipe getRecipeEagerByComment(Long id) {
+        return recipeDao.getRecipeEagerByComment(id);
+    }
+    public List<Recipe> getBy(User user) {
+        return recipeDao.getBy(user);
     }
 }

@@ -4,6 +4,11 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import trainingProject.ApplicationBootstrap;
 import trainingProject.model.Comment;
 import trainingProject.model.Recipe;
 import trainingProject.model.User;
@@ -11,25 +16,30 @@ import trainingProject.model.User;
 import java.util.Calendar;
 import java.util.List;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes= ApplicationBootstrap.class)
 public class CommentDaoTest {
+    @Autowired
     private UserDao userDao;
     private User user;
 
+    @Autowired
     private RecipeDao recipeDao;
     private Recipe recipe1;
     private Recipe recipe2;
 
+    @Autowired
     private CommentDao commentDao;
     private Comment comment1;
     private Comment comment2;
 
     @Before
     public void init() {
-        userDao = new UserDaoImpl();
+        //userDao = new UserDaoImpl();
         user = new User("Meow", "meow@gmail.com", "abcd");
         userDao.save(user);
 
-        recipeDao = new RecipeDaoImpl();
+        //recipeDao = new RecipeDaoImpl();
         recipe1 = new Recipe();
         recipe1.setCreationDate(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
         recipe1.setCuisine("Greek");
@@ -48,7 +58,7 @@ public class CommentDaoTest {
         recipe2.setUser(user);
         recipeDao.save(recipe2);
 
-        commentDao = new CommentDaoImpl();
+        //commentDao = new CommentDaoImpl();
 
         comment1 = new Comment();
         comment1.setContent("GOOD");
