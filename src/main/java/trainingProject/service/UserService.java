@@ -1,11 +1,13 @@
 package trainingProject.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import trainingProject.model.User;
 import trainingProject.repository.UserDao;
 
 import java.util.List;
+
 
 @Service
 public class UserService {
