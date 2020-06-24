@@ -10,10 +10,11 @@ import trainingProject.service.UserService;
 import java.util.List;
 
 @RestController
-
 public class UserController {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     public void getUsers() {
@@ -21,8 +22,9 @@ public class UserController {
     }
 
     @RequestMapping(value = "/user/{Id}", method = RequestMethod.GET)
-    public void getUserById(@PathVariable(name="Id") Long id) {
+    public User getUserById(@PathVariable(name="Id") Long id) {
         logger.debug("the user id is" + id);
+        return userService.getBy(id);
     }
 
 }

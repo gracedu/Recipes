@@ -2,10 +2,12 @@ package trainingProject.repository;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import trainingProject.model.Comment;
 import trainingProject.model.Recipe;
@@ -18,11 +20,13 @@ import java.util.List;
 @Repository
 public class CommentDaoImpl implements CommentDao {
     private Logger logger = LoggerFactory.getLogger(getClass());
+    @Autowired
+    private SessionFactory sessionFactory;
 
     @Override
     public Comment save(Comment comment) {
         Transaction transaction = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         try {
             transaction = session.beginTransaction();
             session.save(comment);
@@ -43,7 +47,7 @@ public class CommentDaoImpl implements CommentDao {
     @Override
     public List<Comment> getComments() {
         String hql = "FROM Comment";
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         List<Comment> result = new ArrayList<>();
         try {
             Query<Comment> query = session.createQuery(hql);
@@ -60,7 +64,7 @@ public class CommentDaoImpl implements CommentDao {
     @Override
     public Comment getBy(Long id) {
         String hql = "FROM Comment c where c.id = :Id";
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         try {
             Query<Comment> query = session.createQuery(hql);
             query.setParameter("Id", id);
@@ -76,9 +80,9 @@ public class CommentDaoImpl implements CommentDao {
 
     @Override
     public boolean delete(Comment comment) {
-        String hql = "DELETE Comment as com WHERE com.id = :Id ";
+        String hql = "DELETE FROM Comment as com WHERE com.id = :Id ";
         Transaction transaction = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         int deletedCount = 0;
         try {
             transaction = session.beginTransaction();
@@ -103,7 +107,7 @@ public class CommentDaoImpl implements CommentDao {
     @Override
     public List<Comment> getBy(Recipe recipe) {
         String hql = "From Comment as c LEFT JOIN FETCH c.recipe as r where r.id = :Id";
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         try {
             Query<Comment> query = session.createQuery(hql);
             query.setParameter("Id", recipe.getId());
@@ -121,7 +125,7 @@ public class CommentDaoImpl implements CommentDao {
     @Override
     public List<Comment> getBy(User user) {
         String hql = "From Comment as c LEFT JOIN FETCH c.user as u where u.id = :Id";
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         try {
             Query<Comment> query = session.createQuery(hql);
             query.setParameter("Id", user.getId());

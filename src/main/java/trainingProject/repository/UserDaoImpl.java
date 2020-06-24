@@ -1,11 +1,13 @@
 package trainingProject.repository;
 
 import org.hibernate.HibernateException;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import trainingProject.model.User;
 import trainingProject.util.HibernateUtil;
@@ -16,11 +18,13 @@ import java.util.List;
 @Repository
 public class UserDaoImpl implements UserDao {
     private Logger logger = LoggerFactory.getLogger(getClass());
+    @Autowired
+    private SessionFactory sessionFactory;
 
     @Override
     public User save(User user) {
         Transaction transaction = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         try {
             transaction = session.beginTransaction();
             session.save(user);
@@ -40,7 +44,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public List<User> getUsers() {
         Transaction transaction = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         String hql = "FROM User";
         List<User> result = new ArrayList<>();
         try {
@@ -58,7 +62,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User getBy(Long id) {
         String hql = "FROM User u where u.id = :Id";
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         try {
             Query<User> query = session.createQuery(hql);
             query.setParameter("Id", id);
@@ -77,7 +81,7 @@ public class UserDaoImpl implements UserDao {
         String hql = "DELETE FROM User WHERE id = :Id";
         int deletedCount = 0;
         Transaction transaction = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         try {
             transaction = session.beginTransaction();
             Query<User> query = session.createQuery(hql);
@@ -100,7 +104,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User getUserEagerByRecipe(Long id) {
         String hql = "FROM User u LEFT JOIN FETCH u.recipes where u.id = :Id";
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         try {
             Query<User> query = session.createQuery(hql);
             query.setParameter("Id", id);
@@ -119,7 +123,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User getUserEagerByComment(Long id) {
         String hql = "FROM User u LEFT JOIN FETCH u.comments where u.id = :Id";
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         try {
             Query<User> query = session.createQuery(hql);
             query.setParameter("Id", id);

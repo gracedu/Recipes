@@ -7,6 +7,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import trainingProject.model.Recipe;
 import trainingProject.model.User;
@@ -19,11 +20,13 @@ import java.util.Set;
 @Repository
 public class RecipeDaoImpl implements RecipeDao {
     private Logger logger = LoggerFactory.getLogger(getClass());
+    @Autowired
+    private SessionFactory sessionFactory;
 
     @Override
     public Recipe save(Recipe recipe) {
         Transaction transaction = null;  //transaction for DAO
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        //SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
         try {
             transaction = session.beginTransaction();
@@ -44,7 +47,7 @@ public class RecipeDaoImpl implements RecipeDao {
     @Override
     public List<Recipe> getRecipes() {
         String hql = "FROM Recipe"; //SELECT r FROM Recipe r
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+      //  SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session s = sessionFactory.openSession();
         List<Recipe> result = new ArrayList<>();
         try {
@@ -62,7 +65,7 @@ public class RecipeDaoImpl implements RecipeDao {
     @Override
     public Recipe getBy(Long id) {
         String hql = "FROM Recipe r where r.id = :Id";
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         try {
             Query<Recipe> query = session.createQuery(hql);
             query.setParameter("Id", id);
@@ -81,7 +84,7 @@ public class RecipeDaoImpl implements RecipeDao {
         String hql = "DELETE Recipe as rec where rec.id = :Id"; //:Id is a placeholder
         int deletedCount = 0;
         Transaction transaction = null;
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        //SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
         try {
             transaction = session.beginTransaction();
@@ -104,7 +107,7 @@ public class RecipeDaoImpl implements RecipeDao {
     @Override
     public Recipe getRecipeEagerByComment(Long id) {
         String hql = "From Recipe r LEFT JOIN FETCH r.comments WHERE r.id = :Id";
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         try {
             Query<Recipe> query = session.createQuery(hql);
             query.setParameter("Id", id);
@@ -123,7 +126,7 @@ public class RecipeDaoImpl implements RecipeDao {
     @Override
     public List<Recipe> getBy(User user) {
         String hql = "FROM Recipe r LEFT JOIN FETCH r.user as u WHERE u.id = :Id";
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         try {
             Query<Recipe> query = session.createQuery(hql);
             query.setParameter("Id", user.getId());

@@ -14,10 +14,10 @@ import org.slf4j.LoggerFactory;
 import java.util.Properties;
 
 public class HibernateUtil {
-    private static SessionFactory sessionFactory; //sessionFactory is a singleton
-    private static Logger logger = LoggerFactory.getLogger(HibernateUtil.class);
+    private SessionFactory sessionFactory; //sessionFactory is a singleton
+    private Logger logger = LoggerFactory.getLogger(HibernateUtil.class);
 
-    public static SessionFactory getSessionFactory() {
+    public SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
             try {
                 String[] modelPackages = {"trainingProject.model"};
@@ -49,11 +49,12 @@ public class HibernateUtil {
 
         return sessionFactory;
     }
-
+/*
     public static void main(String[] args) {
         SessionFactory sf = HibernateUtil.getSessionFactory();
         logger.info("success generate sf" + sf.hashCode());
         Session s = sf.openSession(); //factory design pattern
         s.close();
     }
+    */
 }
