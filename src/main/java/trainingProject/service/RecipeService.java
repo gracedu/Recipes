@@ -35,4 +35,7 @@ public class RecipeService {
     public List<Recipe> getBy(User user) {
         return recipeDao.getBy(user);
     }
+    public Recipe update(Recipe recipe) {
+        return recipeDao.update(recipe);
+    }
 }

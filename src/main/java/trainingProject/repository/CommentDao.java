@@ -4,6 +4,7 @@ import trainingProject.model.Comment;
 import trainingProject.model.Recipe;
 import trainingProject.model.User;
 
+import java.util.Comparator;
 import java.util.List;
 
 public interface CommentDao {
@@ -13,4 +14,5 @@ public interface CommentDao {
     boolean delete(Comment comment);
     List<Comment> getBy(Recipe recipe);
     List<Comment> getBy(User user);
+    Comment update(Comment comment);
 }

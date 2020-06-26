@@ -36,4 +36,8 @@ public class UserService {
     public User getUserEagerByComment(Long id) {
         return userDao.getUserEagerByComment(id);
     }
+
+    public User update(User u) {
+        return userDao.update(u);
+    }
 }

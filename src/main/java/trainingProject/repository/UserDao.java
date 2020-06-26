@@ -11,4 +11,5 @@ public interface UserDao {
     boolean delete(User user);
     User getUserEagerByRecipe(Long id);//based on table recipes(user_id)
     User getUserEagerByComment(Long id); //based on table comments(user_id)
+    User update(User user);
 }

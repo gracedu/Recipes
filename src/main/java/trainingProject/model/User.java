@@ -1,5 +1,7 @@
 package trainingProject.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
@@ -8,9 +10,11 @@ import java.util.Set;
 @Table(name = "users")
 public class User {
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY) //user is a variable name
     private Set<Recipe> recipes;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Comment> comments;
 
@@ -72,5 +76,9 @@ public class User {
 
     public Set<Comment> getComments() {
         return comments;
+    }
+
+    public String toString() {
+        return "id " + id + " " + name  + " " + email;
     }
 }

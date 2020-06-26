@@ -1,5 +1,6 @@
 package trainingProject.repository;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import trainingProject.model.User;
 import trainingProject.util.HibernateUtil;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -134,6 +136,23 @@ public class UserDaoImpl implements UserDao {
         catch (HibernateException e) {
             logger.error("fail to retrieve data", e);
             session.close();
+            return null;
+        }
+    }
+
+    @Override
+    public User update(User user) {
+        Transaction transaction = null;
+        Session session = sessionFactory.openSession();
+        try {
+            transaction = session.beginTransaction();
+            session.update(user);
+            transaction.commit();
+            return user;
+        }
+        catch (Exception e) {
+            if (transaction != null) transaction.rollback();
+            logger.error("fail to update record", e.getMessage());
             return null;
         }
     }

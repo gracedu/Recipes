@@ -140,4 +140,21 @@ public class RecipeDaoImpl implements RecipeDao {
             return null;
         }
     }
+
+    @Override
+    public Recipe update(Recipe recipe) {
+        Transaction transaction = null;
+        Session session = sessionFactory.openSession();
+        try {
+            transaction = session.beginTransaction();
+            session.update(recipe);
+            transaction.commit();
+            return recipe;
+        }
+        catch (Exception e) {
+            if (transaction != null) transaction.rollback();
+            logger.error("fail to update record", e.getMessage());
+            return null;
+        }
+    }
 }

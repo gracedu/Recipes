@@ -9,8 +9,6 @@ import trainingProject.util.HibernateUtil;
 public class HibernateConfig {
     @Bean
     public SessionFactory getHibernateSessionFactory() {
-
-
         HibernateUtil hibernateUtil = new HibernateUtil();
         return hibernateUtil.getSessionFactory();
     }

@@ -12,5 +12,6 @@ public interface RecipeDao {
     boolean delete(Recipe recipe);
     Recipe getRecipeEagerByComment(Long id);
     List<Recipe> getBy(User user);
+    Recipe update(Recipe recipe);
 
 }

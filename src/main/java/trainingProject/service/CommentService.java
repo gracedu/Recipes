@@ -32,4 +32,7 @@ public class CommentService {
     public List<Comment> getBy(User user) {
         return commentDao.getBy(user);
     }
+    public Comment update(Comment comment) {
+        return commentDao.update(comment);
+    }
 }

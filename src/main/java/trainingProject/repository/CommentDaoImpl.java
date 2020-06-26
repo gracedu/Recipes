@@ -140,4 +140,21 @@ public class CommentDaoImpl implements CommentDao {
         }
     }
 
+    @Override
+    public Comment update(Comment comment) {
+        Transaction transaction = null;
+        Session session = sessionFactory.openSession();
+        try {
+            transaction = session.beginTransaction();
+            session.update(comment);
+            transaction.commit();
+            return comment;
+        }
+        catch (Exception e) {
+            if (transaction != null) transaction.rollback();
+            logger.error("fail to update record", e.getMessage());
+            return null;
+        }
+    }
+
 }
