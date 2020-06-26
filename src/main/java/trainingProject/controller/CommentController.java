@@ -4,10 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import trainingProject.model.Comment;
 import trainingProject.service.CommentService;
 
@@ -35,5 +32,21 @@ public class CommentController {
         return commentService.getBy(id);
     }
 
-    //TODO update and create
+
+    // /comment POST
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    public Comment create(@RequestBody Comment comment) {
+        logger.debug("create a comment");
+        Comment c = commentService.save(comment);
+        return c;
+    }
+
+    @RequestMapping(value = "/{Id}", method = RequestMethod.PATCH)
+    public Comment updateComment(@PathVariable("Id") long id, @RequestParam("content") String content) {
+        logger.debug("update the comment " + id);
+        Comment c = commentService.getBy(id);
+        c.setContent(content);
+        c = commentService.update(c);
+        return c;
+    }
 }

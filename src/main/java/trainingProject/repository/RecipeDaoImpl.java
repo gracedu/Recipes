@@ -46,7 +46,7 @@ public class RecipeDaoImpl implements RecipeDao {
 
     @Override
     public List<Recipe> getRecipes() {
-        String hql = "FROM Recipe"; //SELECT r FROM Recipe r
+        String hql = "FROM Recipe r JOIN FETCH r.user"; //SELECT r FROM Recipe r
       //  SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session s = sessionFactory.openSession();
         List<Recipe> result = new ArrayList<>();

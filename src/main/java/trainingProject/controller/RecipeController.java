@@ -1,9 +1,9 @@
 package trainingProject.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import trainingProject.model.Recipe;
 import trainingProject.service.RecipeService;
@@ -25,7 +25,6 @@ public class RecipeController {
         return recipeService.getRecipes();
     }
 
-    //TODO  One user created this recipe
     // /recipe POST
     @RequestMapping(value = "", method = RequestMethod.POST)
     public Recipe create(@RequestBody Recipe recipe) {
@@ -41,11 +40,34 @@ public class RecipeController {
         return recipeService.getBy(id);
     }
 
-    /*
-    //TODO update name, ingredient, description
+    // /recipe/197?name=anotherNewName PATCH
     @RequestMapping(value = "/{Id}", method = RequestMethod.PATCH)
-        public Recipe updateRecipe(@PathVariable("iD") long id, ) {
+    public Recipe updateRecipeName(@PathVariable("Id") long id, @RequestParam("name") String name) {
+        logger.debug("change name");
+        Recipe r = recipeService.getBy(id);
+        r.setName(name);
+        r = recipeService.update(r);
+        return r;
+    }
 
+/*
+    @RequestMapping(value = "/{Id}", method = RequestMethod.PATCH)
+    public Recipe updateRecipeIngredient(@PathVariable("Id") long id, @RequestParam("ingredient") String ingredient) {
+        logger.debug("change ingredient");
+        Recipe r = recipeService.getBy(id);
+        r.setIngredient(ingredient);
+        r = recipeService.update(r);
+        return r;
+    }
+
+/*
+    @RequestMapping(value = "/{Id}", method = RequestMethod.PATCH)
+    public Recipe updateRecipeDescription(@PathVariable("Id") long id, @RequestParam("description") String description) {
+        logger.debug("change description");
+        Recipe r = recipeService.getBy(id);
+        r.setDescription(description);
+        r = recipeService.update(r);
+        return r;
     }
 
      */

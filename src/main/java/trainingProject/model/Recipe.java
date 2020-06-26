@@ -2,6 +2,7 @@ package trainingProject.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -12,13 +13,11 @@ import java.util.Set;
 @Entity
 @Table(name = "recipes")
 public class Recipe {
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    @JsonIgnore
     private Set<Comment> comments;
 
     //@Id is primary key
