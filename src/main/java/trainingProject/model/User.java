@@ -41,6 +41,7 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
+    //owning side
     @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinTable(name = "users_role",
             joinColumns = { @JoinColumn( name = "user_id") },
