@@ -14,4 +14,5 @@ public interface UserDao {
     User update(User user);
 
 
+    User getUserByCredentials(String email, String password);
 }

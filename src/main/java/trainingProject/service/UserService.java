@@ -40,4 +40,9 @@ public class UserService {
     public User update(User u) {
         return userDao.update(u);
     }
+
+    //either username and email works
+    public User getUserByCredentials(String email, String password) {
+        return userDao.getUserByCredentials(email, password);
+    }
 }

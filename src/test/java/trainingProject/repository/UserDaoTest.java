@@ -115,4 +115,10 @@ public class UserDaoTest {
         Assert.assertEquals(userResult.getName(), user.getName());
         Assert.assertTrue(userResult.getComments().size() > 0);
     }
+
+    @Test
+    public void getUserByCredentialsTest() {
+        User u1 = userDao.getUserByCredentials("gracedjx@gmail.com", "1234");
+        Assert.assertEquals(u1, user);
+    }
 }

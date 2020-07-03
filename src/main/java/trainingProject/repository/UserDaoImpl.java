@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import trainingProject.model.User;
 import trainingProject.util.HibernateUtil;
 
@@ -153,6 +154,23 @@ public class UserDaoImpl implements UserDao {
         catch (Exception e) {
             if (transaction != null) transaction.rollback();
             logger.error("fail to update record", e.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public User getUserByCredentials(String email, String password){
+        String hql = "From User as u where (lower(u.email) = :email or lower(u.name) = :email) and u.password = :password";
+        logger.debug(String.format("User email: %s, password: %s", email, password));
+        Session session = sessionFactory.openSession();
+        try {
+            Query<User> query = session.createQuery(hql);
+            query.setParameter("email", email.toLowerCase().trim());
+            query.setParameter("password", password);
+            return query.uniqueResult();
+        }
+        catch (Exception e) {
+            logger.error("can't find user based on given credential", e.getMessage());
             return null;
         }
     }

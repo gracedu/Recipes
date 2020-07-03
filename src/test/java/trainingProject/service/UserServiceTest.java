@@ -31,7 +31,6 @@ public class UserServiceTest {
 
     @Before
     public void setup() {
-        userService = new UserService();
         user = new User("Lisi", "lisi@gmail.com", "12345");
         userService.save(user);
 
@@ -72,5 +71,11 @@ public class UserServiceTest {
         Assert.assertNotNull(userResult);
         Assert.assertEquals(userResult.getName(), user.getName());
         Assert.assertTrue(userResult.getComments().size() > 0);
+    }
+
+    @Test
+    public void getUserByCredentialsTest() {
+        User u1 = userService.getUserByCredentials("Lisi", "12345");
+        Assert.assertEquals(u1, user);
     }
 }

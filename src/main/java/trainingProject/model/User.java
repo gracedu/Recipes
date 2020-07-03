@@ -161,4 +161,8 @@ public class User {
     public int hashCode() {
         return Objects.hash(id, name, email, password, secretKey, firstName, lastName);
     }
+
+    public void setId(long l) {
+        this.id = l;
+    }
 }
