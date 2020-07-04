@@ -31,6 +31,16 @@ public class JWTServiceTest {
         String[] parts = token.split("\\.");
         Assert.assertEquals(3, parts.length);
 
+
+
+    }
+
+    @Test
+    public void decryptTokenTest() {
+        User u = new User();
+        u.setId(1L);
+        u.setName("zhangsan");
+        String token = jwtService.generateToken(u);
         // check claims details
         Claims claims = jwtService.decryptJwtToken(token);
         Assert.assertEquals("zhangsan", claims.getSubject());

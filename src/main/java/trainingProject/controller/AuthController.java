@@ -23,13 +23,13 @@ public class AuthController {
     // 3. return token
     // /user POST
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public String authentication(@RequestParam("username") String username, @RequestParam("password") String password) {
-        logger.debug("username is " + username + " password is " + password );
-        String token;
+    public String authentication(@RequestBody User u) {
+        logger.debug("username is " + u.getEmail() + " password is " + u.getPassword());
         try {
-            User u = userService.getUserByCredentials(username, password);
-            logger.debug(u.toString());
-            token = jwtService.generateToken(u);
+
+            User user = userService.getUserByCredentials(u.getEmail(), u.getPassword());
+            logger.debug(user.toString());
+            String token = jwtService.generateToken(user);
             return token;
         }
         catch (Exception e) {
