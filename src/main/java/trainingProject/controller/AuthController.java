@@ -30,6 +30,7 @@ public class AuthController {
             User u = userService.getUserByCredentials(username, password);
             logger.debug(u.toString());
             token = jwtService.generateToken(u);
+            return token;
         }
         catch (Exception e) {
             e.printStackTrace();
