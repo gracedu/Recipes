@@ -19,4 +19,12 @@ public class RoleService {
     public List<Role> getAllRoles() {
         return roleDao.findAllRoles();
     }
+
+    public Role save(Role role) {
+        return roleDao.save(role);
+    }
+
+    public boolean delete(Role role) {
+        return roleDao.delete(role);
+    }
 }

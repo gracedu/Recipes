@@ -23,7 +23,7 @@ public class RoleDaoImpl implements RoleDao{
 
     @Override
     public Role getRoleByName(String name) {
-        String hql = "FROM Role as r where lower(r.name) = :Name";
+        String hql = "FROM Role as r where r.name = :Name";
         Session session = sessionFactory.openSession();
         try {
             Query<Role> query = session.createQuery(hql);
@@ -54,5 +54,48 @@ public class RoleDaoImpl implements RoleDao{
             session.close();
         }
         return result;
+    }
+
+    @Override
+    public Role save(Role role) {
+        Transaction transaction = null;
+        Session session = sessionFactory.openSession();
+        try {
+            transaction = session.beginTransaction();
+            session.save(role);
+            transaction.commit();
+            session.close();
+            return role;
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            logger.error("failure to insert record", e);
+            session.close();
+            return null;
+        }
+    }
+
+
+    @Override
+    public boolean delete(Role role) {
+        Transaction transaction = null;
+        Session session = sessionFactory.openSession();
+        String hql = "DELETE FROM Role AS r WHERE r.id = :Id";
+        int deletedCount = 0;
+        try {
+            transaction = session.beginTransaction();
+            Query<Role> q = session.createQuery(hql);
+            q.setParameter("Id", role.getId());
+            deletedCount = q.executeUpdate();
+            transaction.commit();
+            return deletedCount > 0 ? true : false;
+        }
+        catch (Exception e) {
+            if (transaction != null) transaction.rollback();
+            logger.error("fail to delete the role", e);
+            session.close();
+            return false;
+        }
     }
 }

@@ -103,7 +103,7 @@ public class RecipeDaoImpl implements RecipeDao {
         return false;
     }
 
-    // get the recipe that the comment is for, might not be necessary!
+    // get the recipe that the comment is for, might not be necessary for the business logic!
     @Override
     public Recipe getRecipeEagerByComment(Long id) {
         String hql = "From Recipe r LEFT JOIN FETCH r.comments WHERE r.id = :Id";

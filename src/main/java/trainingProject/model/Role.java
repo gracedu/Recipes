@@ -118,4 +118,8 @@ public class Role {
     public int hashCode() {
         return Objects.hash(id, name, allowedResource, allowedRead, allowedCreate, allowedUpdate, allowedDelete);
     }
+
+    public String toString() {
+        return "" + this.name;
+    }
 }

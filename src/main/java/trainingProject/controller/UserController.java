@@ -5,10 +5,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import trainingProject.model.Role;
 import trainingProject.model.User;
+import trainingProject.service.RoleService;
 import trainingProject.service.UserService;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping(value="/user")
@@ -16,6 +20,8 @@ public class UserController {
     private Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
     private UserService userService;
+    @Autowired
+    private RoleService roleService;
 
     // /user GET
     @RequestMapping(value = "", method = RequestMethod.GET)
@@ -41,10 +47,15 @@ public class UserController {
         return u;
     }
 
+    //TODO grant role is it right?
+    //user signup
     // /user POST
     @RequestMapping(value = "", method = RequestMethod.POST)
     public User create(@RequestBody User newUser) {
         logger.debug(newUser.toString());
+     /*   Set<String> r = new HashSet<>();
+        r.add("user");
+        newUser.setRoles(r);*/
         User user = userService.save(newUser);
         return user;
     }
