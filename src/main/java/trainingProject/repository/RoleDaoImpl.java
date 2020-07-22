@@ -81,12 +81,12 @@ public class RoleDaoImpl implements RoleDao{
     public boolean delete(Role role) {
         Transaction transaction = null;
         Session session = sessionFactory.openSession();
-        String hql = "DELETE FROM Role AS r WHERE r.id = :Id";
+        String hql = "DELETE FROM Role AS r WHERE r.name = :Name";
         int deletedCount = 0;
         try {
             transaction = session.beginTransaction();
             Query<Role> q = session.createQuery(hql);
-            q.setParameter("Id", role.getId());
+            q.setParameter("Name", role.getName());
             deletedCount = q.executeUpdate();
             transaction.commit();
             return deletedCount > 0 ? true : false;

@@ -25,13 +25,13 @@ public class AWSConfig {
 //        return s3Client;
 //    }
 
-    private String  myAWSAccessKeyId = System.getProperty("accessKeyId");
-    private String myAWSSecretKey = System.getProperty("secretKey");
+//    private String  myAWSAccessKeyId = System.getProperty("accessKeyId");
+//    private String myAWSSecretKey = System.getProperty("secretKey");
 
     @Bean
     @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
     public AmazonS3 getAmazonS3() {
-         BasicAWSCredentials awsCreds = new BasicAWSCredentials(myAWSAccessKeyId, myAWSSecretKey);
+//         BasicAWSCredentials awsCreds = new BasicAWSCredentials(myAWSAccessKeyId, myAWSSecretKey);
          AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
                  .withCredentials(new DefaultAWSCredentialsProviderChain())
                  .withRegion("us-east-1")

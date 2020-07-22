@@ -1,6 +1,7 @@
 package trainingProject.service;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,6 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import trainingProject.ApplicationBootstrap;
 import trainingProject.model.Role;
+
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ApplicationBootstrap.class)
@@ -46,11 +49,12 @@ public class RoleServiceTest {
     @Test
     public void getRoleByNameTest() {
         Role role = roleService.getRoleByName("pirate");
-
+        Assert.assertEquals("pirate", role.toString());
     }
 
     @Test
     public void getAllRolesTest() {
-
+        List<Role> result = roleService.getAllRoles();
+        Assert.assertEquals(5, result.size());
     }
 }
