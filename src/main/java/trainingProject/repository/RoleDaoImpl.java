@@ -23,7 +23,7 @@ public class RoleDaoImpl implements RoleDao{
 
     @Override
     public Role getRoleByName(String name) {
-        String hql = "FROM Role as r where r.name = :Name";
+        String hql = "FROM Role as r where lower(r.name) = lower(:Name)";
         Session session = sessionFactory.openSession();
         try {
             Query<Role> query = session.createQuery(hql);

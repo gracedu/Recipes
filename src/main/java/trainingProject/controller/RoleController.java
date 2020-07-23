@@ -29,9 +29,9 @@ public class RoleController {
         return result;
     }
 
-    // /role?name="Admin" GET
-    @RequestMapping(value = "", method = RequestMethod.GET)
-    public Role getRoleByName(@RequestParam("name") String name) {
+    // /role/roleName GET
+    @RequestMapping(value = "/{name}", method = RequestMethod.GET)
+    public Role getRoleByName(@PathVariable("name") String name) {
         Role result = roleService.getRoleByName(name);
         return result;
     }
