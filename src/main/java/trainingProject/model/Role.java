@@ -33,7 +33,7 @@ public class Role {
     private boolean allowedDelete;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "roles")
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)  //BOTH EAGER??
     private Set<User> users;
 
     public Long getId() {

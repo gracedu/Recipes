@@ -47,15 +47,11 @@ public class UserController {
         return u;
     }
 
-    //TODO grant role is it right?
     //user signup
     // /user POST
     @RequestMapping(value = "", method = RequestMethod.POST)
     public User create(@RequestBody User newUser) {
         logger.debug(newUser.toString());
-     /*   Set<String> r = new HashSet<>();
-        r.add("user");
-        newUser.setRoles(r);*/
         User user = userService.save(newUser);
         return user;
     }

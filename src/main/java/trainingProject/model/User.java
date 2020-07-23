@@ -5,6 +5,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -46,12 +47,12 @@ public class User {
     //owning side
     @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinTable(name = "users_role",
-            joinColumns = { @JoinColumn( name = "user_id") },
-            inverseJoinColumns = { @JoinColumn(name = "role_id") })
-    private Set<Role> roles;
+            joinColumns =  @JoinColumn( name = "user_id") ,
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();    //  must initialize?
 
     public void addRole(Role role) {
-        this.roles.add(role);
+        this.getRoles().add(role);
         role.getUsers().add(this);
     }
 

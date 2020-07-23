@@ -29,12 +29,14 @@ public class RoleController {
         return result;
     }
 
-    // /role/roleName GET
-    @RequestMapping(value = "/{name}", method = RequestMethod.GET)
-    public Role getRoleByName(@PathVariable("name") String name) {
+    // /role?name=roleName GET
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public Role getRoleByName(@RequestParam("name") String name) {
         Role result = roleService.getRoleByName(name);
         return result;
     }
+
+
 
 /*
     public Role getAllRoles() {

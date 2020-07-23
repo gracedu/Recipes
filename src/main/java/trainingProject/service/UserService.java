@@ -3,6 +3,7 @@ package trainingProject.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import trainingProject.model.Role;
 import trainingProject.model.User;
 import trainingProject.repository.UserDao;
 
@@ -13,8 +14,11 @@ import java.util.List;
 public class UserService {
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private RoleService roleService;
 
     public User save(User user) {
+        user.addRole(roleService.getRoleByName("user")); //grant basic roles 写在service layer？
         return userDao.save(user);
     }
     public List<User> getUsers() {

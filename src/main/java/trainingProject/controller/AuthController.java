@@ -35,7 +35,7 @@ public class AuthController {
         try {
             logger.debug("username is " + u.getEmail() + " password is " + u.getPassword());
             User user = userService.getUserByCredentials(u.getEmail(), u.getPassword());
-            if (user == null) { //is email password pair is not in database
+            if (user == null) { //if email password pair is not in database
                 result.put("message", errorMsg);
                 return ResponseEntity.status(HttpServletResponse.SC_UNAUTHORIZED).body(result);
             }

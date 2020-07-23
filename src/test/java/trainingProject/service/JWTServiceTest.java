@@ -18,12 +18,17 @@ import trainingProject.model.User;
 public class JWTServiceTest {
     @Autowired
     JWTService jwtService;
+    @Autowired
+    private UserService userService;
 
     @Test
     public void generateTokenTest() {
         User u = new User();
-        u.setId(1L);
-        u.setName("zhangsan");
+        //u.setId(1L);
+        u.setName("lisi4");
+        u.setEmail("zhangsan@gmail.com");
+        u.setPassword("123456789");
+        userService.save(u);
         String token = jwtService.generateToken(u);
         Assert.assertNotNull(token);
 

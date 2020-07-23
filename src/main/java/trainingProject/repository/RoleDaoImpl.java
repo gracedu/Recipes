@@ -45,7 +45,7 @@ public class RoleDaoImpl implements RoleDao{
         String hql = "FROM Role";
         List<Role> result = new ArrayList<>();
         try {
-            Query query = session.createQuery(hql); //Query<Role> = ...
+            Query query = session.createQuery(hql);
             result = query.list();
             session.close();
         }
