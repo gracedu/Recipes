@@ -46,7 +46,7 @@ public class JWTService {
         String allowedDeleteResources = "";
         //String allowedReadResources = roles.stream().map(r->r.getAllowedResource()).collect(Collectors.joining(","));
         //if using lambda, change the following variables to ""
-        //TODO Junit test
+
         for (Role role : roles) {
             if (role.getAllowedRead()) allowedReadResources = String.join(role.getAllowedResource(), allowedReadResources, ",");
             if (role.getAllowedCreate()) allowedCreateResources = String.join(role.getAllowedResource(), allowedCreateResources, ",");

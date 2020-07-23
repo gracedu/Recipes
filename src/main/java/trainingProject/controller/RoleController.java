@@ -8,6 +8,8 @@ import trainingProject.model.Role;
 import trainingProject.model.User;
 import trainingProject.service.RoleService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/role")
 public class RoleController {
@@ -30,7 +32,7 @@ public class RoleController {
     }
 
     // /role?name=roleName GET
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @RequestMapping(value = "", params = "name", method = RequestMethod.GET)
     public Role getRoleByName(@RequestParam("name") String name) {
         Role result = roleService.getRoleByName(name);
         return result;
@@ -38,8 +40,10 @@ public class RoleController {
 
 
 
-/*
-    public Role getAllRoles() {
-
-    }*/
+    // /role GET
+    @RequestMapping(value="", method = RequestMethod.GET)
+    public List<Role> getAllRoles() {
+        List<Role> result = roleService.getAllRoles();
+        return result;
+    }
 }

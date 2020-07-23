@@ -18,7 +18,7 @@ public class UserService {
     private RoleService roleService;
 
     public User save(User user) {
-        user.addRole(roleService.getRoleByName("user")); //grant basic roles 写在service layer？
+        user.addRole(roleService.getRoleByName("user")); //grant basic roles in service layer？
         return userDao.save(user);
     }
     public List<User> getUsers() {
