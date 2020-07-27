@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -67,9 +68,11 @@ public class AWSS3Service {
         return bucket;
     }
 
+    public String uploadFile(MultipartFile file) throws IOException {
+        return uploadFile("grace-s3-bucket", file);
+    }
+    //TODO TEST
     public String uploadFile(String bucketName, MultipartFile file) throws IOException {
-//        PutObjectRequest request = new PutObjectRequest("grace-s3-bucket", f.getName(), f);
-//        amazonS3.putObject(request);
         try {
             String uuid = UUID.randomUUID().toString();
             String originalFilename = file.getOriginalFilename();
@@ -78,6 +81,7 @@ public class AWSS3Service {
             objectMetadata.setContentType(file.getContentType());
             objectMetadata.setContentLength(file.getSize());
             amazonS3.putObject(bucketName, newFileName, file.getInputStream(),objectMetadata);
+            logger.info(String.format("The file name=%s was uploaded to bucket %s", newFileName, bucketName));
             return newFileName;
         }
         catch (Exception e) {
@@ -86,10 +90,16 @@ public class AWSS3Service {
         }
     }
 
+   //TODO TEST
+    public String getFileUrl(String fileName) {
+        return getFileUrl("grace-s3-bucket", fileName);
+    }
 
-//    public String getFileUrl(String s3Key) {
-//        return amazonS3.get
-//    }
+    public String getFileUrl(String bucketName, String fileName) {
+        return amazonS3.getUrl(bucketName, fileName).toString();
+    }
+
+
 
     //TODO TEST
     public File downloadObject(String bucketName,

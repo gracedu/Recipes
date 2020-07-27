@@ -6,6 +6,8 @@ import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.sqs.AmazonSQS;
+import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,18 +27,27 @@ public class AWSConfig {
 //        return s3Client;
 //    }
 
-//    private String  myAWSAccessKeyId = System.getProperty("accessKeyId");
-//    private String myAWSSecretKey = System.getProperty("secretKey");
+//new DefaultAWSCredentialsProviderChain()
 
     @Bean
     @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
     public AmazonS3 getAmazonS3() {
-//         BasicAWSCredentials awsCreds = new BasicAWSCredentials(myAWSAccessKeyId, myAWSSecretKey);
+        String  myAWSAccessKeyId = System.getProperty("accessKeyId");
+        String myAWSSecretKey = System.getProperty("secretKey");
+         BasicAWSCredentials awsCreds = new BasicAWSCredentials(myAWSAccessKeyId, myAWSSecretKey);
          AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
-                 .withCredentials(new DefaultAWSCredentialsProviderChain())
+                 .withCredentials(new AWSStaticCredentialsProvider(awsCreds))
                  .withRegion("us-east-1")
                  .build();
          return s3Client;
+    }
+
+    @Bean
+    @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
+    public AmazonSQS getAmazonSQS() {
+        return AmazonSQSClientBuilder.standard()
+                .withCredentials(new DefaultAWSCredentialsProviderChain())
+                .build();
     }
 
 }

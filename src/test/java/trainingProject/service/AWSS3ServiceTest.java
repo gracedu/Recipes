@@ -2,6 +2,7 @@ package trainingProject.service;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.Bucket;
+import com.amazonaws.services.s3.model.CreateBucketRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import org.junit.Assert;
 import org.junit.Test;
@@ -34,8 +35,8 @@ public class AWSS3ServiceTest {
     @Test
     public void testCreateBucket() {
         String bucketName = "grace-s3-bucket1190";
-        Bucket bucket = awsS3Service.createBucket(bucketName);
-        Assert.assertNotNull(bucket);
+        awsS3Service.createBucket(bucketName);
+        verify(client, times(1)).createBucket(bucketName);
     }
 
 //    @Test
