@@ -4,7 +4,9 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.Bucket;
 import com.amazonaws.services.s3.model.CreateBucketRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -32,8 +34,14 @@ public class AWSS3ServiceTest {
     @Autowired
     private AmazonS3 client;
 
+    @Before
+
+    @After
+
+
     @Test
     public void testCreateBucket() {
+        String testBucket = "testBucket";
         String bucketName = "grace-s3-bucket1190";
         awsS3Service.createBucket(bucketName);
         verify(client, times(1)).createBucket(bucketName);

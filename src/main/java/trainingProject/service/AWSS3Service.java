@@ -28,34 +28,12 @@ import java.util.UUID;
 @Service
 public class AWSS3Service {
     private Logger logger = LoggerFactory.getLogger(getClass());
-
+    private String bucket = System.getProperty("aws.s3.bucket");
     AmazonS3 amazonS3;
     public AWSS3Service(@Autowired AmazonS3 amazonS3) {
         this.amazonS3 = amazonS3;
     }
-/*
-    public void setAmazonS3() {
-        this.amazonS3 = amazonS3;
-    }
-*/
-    //private String  myAWSAccessKeyId=System.getProperty("accessKeyId");
-    // private String myAWSSecretKey=System.getProperty("secretKey");
-/*
-    private AmazonS3 getS3ClientWithSuppliedCredentials() {
-        BasicAWSCredentials awsCreds = new BasicAWSCredentials(myAWSAccessKeyId, myAWSSecretKey);
-        AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
-                .withCredentials(new AWSStaticCredentialsProvider(awsCreds))
-                .build();
-        return s3Client;
-    }
-*/
-    /*
-    private AmazonS3 getS3ClientUsingDefaultChain() {
-        AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
-                .withRegion(Regions.US_EAST_1)
-                .build();
-        return s3Client;
-    }*/
+
 
     public Bucket createBucket(String bucketName) {
         Bucket bucket = null;
@@ -69,9 +47,9 @@ public class AWSS3Service {
     }
 
     public String uploadFile(MultipartFile file) throws IOException {
-        return uploadFile("grace-s3-bucket", file);
+        return uploadFile(bucket, file);
     }
-    //TODO TEST
+
     public String uploadFile(String bucketName, MultipartFile file) throws IOException {
         try {
             String uuid = UUID.randomUUID().toString();
@@ -92,7 +70,7 @@ public class AWSS3Service {
 
    //TODO TEST
     public String getFileUrl(String fileName) {
-        return getFileUrl("grace-s3-bucket", fileName);
+        return getFileUrl(bucket, fileName);
     }
 
     public String getFileUrl(String bucketName, String fileName) {
