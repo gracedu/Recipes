@@ -68,6 +68,8 @@ public class AWSS3Service {
         }
     }
 
+
+
    //TODO TEST
     public String getFileUrl(String fileName) {
         return getFileUrl(bucket, fileName);
@@ -130,6 +132,10 @@ public class AWSS3Service {
             objectKeyList.add(os.getKey());
         }
         return objectKeyList;
+    }
+
+    public void deleteObject(String bucketName, String objectKey) {
+        amazonS3.deleteObject(bucketName, objectKey);
     }
 
     public void copyObject(String oriBucketName,

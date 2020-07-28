@@ -20,6 +20,9 @@ public class Recipe {
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Comment> comments;
 
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private Set<Image> images;
+
     //@Id is primary key
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,8 +40,6 @@ public class Recipe {
     @Column(name = "description")
     private String description;
 
-   // @Column(name = "publisher")
-   // private String publisher;
 
     @Column(name = "cuisine")
     private String cuisine;
