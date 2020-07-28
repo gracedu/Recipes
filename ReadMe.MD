@@ -17,14 +17,24 @@ Git, Maven, and Tomcat.
        5. A comment is published by one user.
        6. A user could have multiple roles.
        7. A role could contain multiple users.
+    3. Only the role admin could create other roles based on development needs. 
+       User is the role for users.
+    4. Authorization for each role:
+       1. allowed_resource: resources that this role allowed to do actions.
+       2. allowed_read: whether the role could read resources or not
+       3. allowed_create: whether the role could create resources or not
+       4. allowed_update: whether the role could update resources or not
+       5. allowed_delete: whether the role could delete resources or not
+      Admin has all resources and has every authorization set to true.
 ### Development Approaches
     1. Create User, Recipe, Comment and Role.
-    2. Pull the Postgres Docker image and start the container
-    3. Use Flyway to migrate database schema.
-    4. Use Hibernate to do ORM and interact with Postgres database
-    5. Implement persistence layer, service layer, and controller
-    6. Use Postman to interact with the back-end
-    7. Do test for each Restful APIs
+    2. Create an admin.
+    3. Pull the Postgres Docker image and start the container
+    4. Use Flyway to migrate database schema.
+    5. Use Hibernate to do ORM and interact with Postgres database
+    6. Implement persistence layer, service layer, and controller
+    7. Use Postman to interact with the back-end
+    8. Do test for each Restful APIs
     
 ## Configure local environment
 ### 1. setup local database
