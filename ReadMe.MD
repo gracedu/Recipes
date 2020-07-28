@@ -9,6 +9,7 @@ used include Java Spring Boot, Restful Web Services, Hibernate, servlet, JWT,
 Git, Maven, and Tomcat. 
 ### Business Rules
     1. Objects: User, Recipe, Comment, Role
+    
     2. Relationships:
        1. One user could publish many recipes.
        2. One user could publish many comments.
@@ -17,8 +18,10 @@ Git, Maven, and Tomcat.
        5. A comment is published by one user.
        6. A user could have multiple roles.
        7. A role could contain multiple users.
+       
     3. Only the role admin could create other roles based on development needs. 
        User is the role for users.
+       
     4. Authorization for each role:
        1. allowed_resource: resources that this role allowed to do actions.
        2. allowed_read: whether the role could read resources or not
