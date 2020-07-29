@@ -9,7 +9,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @Entity
 @Table(name = "images")
 public class Image implements Serializable {
-    private static final long serialVersionUID = 1l;
+    private static final long serialVersionUID = 1l; /////
 
     @Id
     @GeneratedValue(strategy = SEQUENCE, generator = "images_id_seq")

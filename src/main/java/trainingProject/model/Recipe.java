@@ -20,8 +20,8 @@ public class Recipe {
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Comment> comments;
 
-    @OneToMany(mappedBy = "recipe", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    private Set<Image> images;
+//    @OneToMany(mappedBy = "recipe", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+//    private Set<Image> images;
 
     //@Id is primary key
     @Id

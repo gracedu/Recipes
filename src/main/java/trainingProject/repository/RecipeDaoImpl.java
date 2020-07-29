@@ -26,7 +26,6 @@ public class RecipeDaoImpl implements RecipeDao {
     @Override
     public Recipe save(Recipe recipe) {
         Transaction transaction = null;  //transaction for DAO
-        //SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
         try {
             transaction = session.beginTransaction();

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 import trainingProject.model.Recipe;
 import trainingProject.service.RecipeService;
@@ -19,6 +20,7 @@ public class RecipeController {
     private RecipeService recipeService;
 
     // /recipe GET
+
     @RequestMapping(value = "", method = RequestMethod.GET)
     public List<Recipe> getRecipes() {
         logger.debug("Getting all recipes");
@@ -35,6 +37,7 @@ public class RecipeController {
 
     // /recipe/1 GET
     @RequestMapping(value = "/{Id}", method = RequestMethod.GET)
+    @Cacheable(value="recipe")
     public Recipe getRecipeById(@PathVariable("Id") Long id) {
         logger.debug("Getting recipe by id " + id);
         return recipeService.getBy(id);
