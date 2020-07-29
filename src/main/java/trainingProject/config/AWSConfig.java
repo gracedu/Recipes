@@ -39,7 +39,6 @@ public class AWSConfig {
 
          AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
                  .withCredentials(new DefaultAWSCredentialsProviderChain())
-                 .withRegion("us-east-1")
                  .build();
          return s3Client;
     }

@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.multipart.MultipartFile;
 import trainingProject.ApplicationBootstrap;
 
 import java.io.File;
@@ -47,9 +48,9 @@ public class AWSS3ServiceTest {
         verify(client, times(1)).createBucket(bucketName);
     }
 
-//    @Test
-//    public void uploadFileTest() throws IOException {
-//        awsS3Service.uploadFile(new File("/Users/jinxiadu/Desktop/File1.txt"));
-//        verify(client, times(1)).putObject(any(PutObjectRequest.class));
-//    }
+    @Test
+    public void uploadFileTest() throws IOException {
+        awsS3Service.uploadFile((MultipartFile) new File("/Users/jinxiadu/Desktop/File1.txt"));
+        verify(client, times(1)).putObject(any(PutObjectRequest.class));
+    }
 }
