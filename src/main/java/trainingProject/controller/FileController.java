@@ -36,7 +36,7 @@ public class FileController {
 
     }
 
-//same function as the below method
+    //same function as the below method, they both return the url of the object
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String getObject(@RequestParam("fileName") String s3Key) {
         return awss3Service.getFileUrl(s3Key);

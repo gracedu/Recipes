@@ -8,8 +8,8 @@ import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity
 @Table(name = "images")
-public class Image implements Serializable {
-    private static final long serialVersionUID = 1l; /////
+public class Image {
+  //  private static final long serialVersionUID = 1l; /////
 
     @Id
     @GeneratedValue(strategy = SEQUENCE, generator = "images_id_seq")
@@ -32,9 +32,10 @@ public class Image implements Serializable {
     @JoinColumn(name = "recipe_id")
     private Recipe recipe;
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
+
+   // public static long getSerialVersionUID() {
+   //     return serialVersionUID;
+   // }
 
     public Long getId() {
         return id;
