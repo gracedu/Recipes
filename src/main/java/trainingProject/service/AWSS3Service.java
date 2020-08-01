@@ -79,6 +79,24 @@ public class AWSS3Service {
         return amazonS3.getUrl(bucketName, fileName).toString();
     }
 
+    public void putObject(String S3Key, File file) {
+        putObject(bucket, S3Key, file);
+    }
+
+    public void putObject(String bucket, String s3Key, File file) {
+        amazonS3.putObject(bucket, s3Key, file);
+    }
+
+    public S3Object getObject(String s3Key) {
+        if (s3Key == null) return null;
+        return getObject(bucket, s3Key);
+    }
+
+    public S3Object getObject(String bucket, String s3Key) {
+        return amazonS3.getObject(bucket, s3Key);
+    }
+
+
 
 
     //TODO TEST

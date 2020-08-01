@@ -73,9 +73,9 @@ public class Image {
         return uuid;
     }
 
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
-    }
+    //public void setUuid(String uuid) {
+    //    this.uuid = uuid;
+    //}
 
     public Recipe getRecipe() {
         return recipe;
