@@ -5,12 +5,13 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.ascending.training</groupId>
-  <artifactId>recipes</artifactId>
+  <artifactId>mvc</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>recipes</name>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+  <name>recipesAPI</name>
+
+<!--  &lt;!&ndash; FIXME change it to the project's website &ndash;&gt;-->
+<!--  <url>http://www.example.com</url>-->
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

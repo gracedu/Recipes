@@ -4,6 +4,7 @@ import com.amazonaws.AmazonServiceException;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.regions.Regions;
+import com.amazonaws.services.kafka.model.S3;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.*;
@@ -79,13 +80,16 @@ public class AWSS3Service {
         return amazonS3.getUrl(bucketName, fileName).toString();
     }
 
-    public void putObject(String S3Key, File file) {
-        putObject(bucket, S3Key, file);
+    public void putObject(String s3Key, MultipartFile file) throws IOException {
+        ObjectMetadata objectMetadata = new ObjectMetadata();
+        objectMetadata.setContentType(file.getContentType());
+        objectMetadata.setContentLength(file.getSize());
+        amazonS3.putObject(bucket, s3Key, file.getInputStream(), objectMetadata);
     }
 
-    public void putObject(String bucket, String s3Key, File file) {
-        amazonS3.putObject(bucket, s3Key, file);
-    }
+    //public void putObject(String bucket, String s3Key, File file) {
+    //    amazonS3.putObject(bucket, s3Key, file);
+    //}
 
     public S3Object getObject(String s3Key) {
         if (s3Key == null) return null;

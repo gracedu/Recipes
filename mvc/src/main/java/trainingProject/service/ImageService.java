@@ -26,13 +26,11 @@ public class ImageService {
         if (file == null || file.isEmpty()) throw new ServiceException("Image is empty");
         String originalFileName = file.getOriginalFilename();
         String extension = FilenameUtils.getExtension(originalFileName);
-        String homeDir = "/Users/jinxiadu/Desktop/Luffy.jpg"; //catalin??
         Image image = new Image();
+        //is base name necessary??
         String s3Key = FilenameUtils.getBaseName(originalFileName) + "_" + image.getUuid() + extension;
-        File localFile = new File(homeDir + s3Key);
         try {
-            file.transferTo(localFile);
-            fileService.putObject(s3Key, localFile);
+            fileService.putObject(s3Key, file);
             S3Object s3Object = fileService.getObject(s3Key);
             image.setUrl(fileService.getFileUrl(s3Object.getKey()));
             image.setExtension(extension);
