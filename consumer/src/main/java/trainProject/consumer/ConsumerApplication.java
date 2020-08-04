@@ -8,10 +8,11 @@ import trainProject.consumer.Service.SQSMessageService;
 @SpringBootApplication(scanBasePackages = {"trainProject.consumer"})
 public class ConsumerApplication {
     public static void main(String[] args) {
-        //SpringApplication.run(ConsumerApplication.class, args);
+        SpringApplication.run(ConsumerApplication.class, args);
 
-        ConfigurableApplicationContext app = SpringApplication.run(ConsumerApplication.class, args);
-        SQSMessageService sqsMessageService = app.getBean(SQSMessageService.class);
-        sqsMessageService.receiveMessage();
+        // The following is the same as getting the service from @Autowired
+//        ConfigurableApplicationContext app = SpringApplication.run(ConsumerApplication.class, args);
+//        SQSMessageService sqsMessageService = app.getBean(SQSMessageService.class);
+//        sqsMessageService.receiveMessage();
     }
 }
