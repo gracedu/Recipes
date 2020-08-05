@@ -20,6 +20,7 @@ import javax.jms.JMSException;
 import javax.jms.MessageConsumer;
 import javax.jms.Session;
 
+@Deprecated
 @Service
 @Component
 public class SQSMessageService {
@@ -28,14 +29,9 @@ public class SQSMessageService {
 
     @Autowired
     private AmazonSQS sqsClient;
-//    AmazonSQS sqsClient;
-//    public SQSMessageService(@Autowired AmazonSQS sqsClient) {
-//        this.sqsClient = sqsClient;
-//    }
 
 
     public void receiveMessage()  {
-
         System.out.println("Receiving messages from MyQueue.\n");
         final ReceiveMessageRequest receiveMessageRequest = new ReceiveMessageRequest(getQueueUrl(queueName));
         final List<Message> msg = sqsClient.receiveMessage(receiveMessageRequest).getMessages();
@@ -73,7 +69,7 @@ public class SQSMessageService {
         );
 
         SQSConnection connection = connectionFactory.createConnection();
-        Session session = connection.createSession(false, Session.CLIENT_ACKNOWLEDGE);
+        Session session = connection.createSession(false, Session.CLIENT_ACKNOWLEDGE);//or AUTO_ACKNOWLEDGE
 
         MessageConsumer consumer = session.createConsumer(session.createQueue(System.getProperty("aws.queue.name")));
         MyListener processService = new MyListener();
