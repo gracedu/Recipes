@@ -6,7 +6,7 @@ You can find your favorite recipes in this website and learn how to cook!
 This is a web application involves MVC design pattern and allows users to 
 register accounts, search for recipes and post comments. Frameworks and tools
 used include Java Spring Boot, Restful Web Services, Hibernate, servlet, JWT,
-Git, Maven, and Tomcat. 
+Git, Maven, AWS(S3, SQS), and Tomcat. 
 ### Business Rules
     1. Objects: User, Recipe, Comment, Role
     
@@ -29,6 +29,11 @@ Git, Maven, and Tomcat.
        4. allowed_update: whether the role could update resources or not
        5. allowed_delete: whether the role could delete resources or not
       Admin has all resources and has every authorization set to true.
+### Code Structure
+This is a multi-model project managed by Maven.
+* root
+    * mvc: model, view, and controller 
+    * consumer: consumes internal messages
 ### Development Approaches
     1. Create User, Recipe, Comment and Role.
     2. Create an admin.
@@ -38,6 +43,8 @@ Git, Maven, and Tomcat.
     6. Implement persistence layer, service layer, and controller
     7. Use Postman to interact with the back-end
     8. Do test for each Restful APIs
+    9. Initializa AWS S3 bucket as a cloud storage
+    10. Implement JMS(Java Message Service) with AWS SQS(Simple Queue Service) to process internal messages
     
 ## Configure local environment
 ### 1. setup local database
