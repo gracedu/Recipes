@@ -59,6 +59,6 @@ public class RoleDaoTest {
         Assert.assertEquals("people", result.toString());
 
         Role result2 = roleDao.getRoleByName("King");
-        Assert.assertEquals("King".toLowerCase(), result2.toString());
+        Assert.assertEquals("King".toLowerCase(), result2.toString().toLowerCase());
     }
 }
