@@ -155,7 +155,7 @@
           <version>6.0.4</version>
           <configuration>
             <driver>org.postgresql.Driver</driver>
-            <url>jdbc:postgresql://localhost:5431/recipes</url>
+            <url>${database.url}</url>
             <user>admin</user>
             <password>password</password>
             <schemas>
