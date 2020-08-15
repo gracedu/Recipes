@@ -4,6 +4,7 @@ import io.jsonwebtoken.Claims;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 import trainingProject.model.User;
 import trainingProject.service.JWTService;
 import trainingProject.service.UserService;
@@ -34,6 +35,10 @@ public class SecurityFilter implements Filter {
     //doFilter dispatch to controller
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        /* This way of spring bean autowire to servlet filter is not recommended, because it's needed for each filter
+        if (userService == null) {
+            SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, servletRequest.getServletContext());
+        } */
         int statusCode = authorization((HttpServletRequest) servletRequest);
         if (statusCode == HttpServletResponse.SC_ACCEPTED) filterChain.doFilter(servletRequest, servletResponse);
         else ((HttpServletResponse)servletResponse).sendError(statusCode);
