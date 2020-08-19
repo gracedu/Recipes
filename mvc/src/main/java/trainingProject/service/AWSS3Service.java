@@ -71,7 +71,6 @@ public class AWSS3Service {
 
 
 
-   //TODO TEST
     public String getFileUrl(String fileName) {
         return getFileUrl(bucket, fileName);
     }

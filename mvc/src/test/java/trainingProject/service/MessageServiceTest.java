@@ -38,6 +38,6 @@ public class MessageServiceTest {
     @Test
     public void sendMessageTest() {
         messageService.sendMessage("Hello World!", 1);
-        //Assert.assertTrue(false);
+        //         Assert.assertTrue(false);
     }
 }
