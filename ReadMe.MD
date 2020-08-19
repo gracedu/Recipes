@@ -64,7 +64,7 @@ database.password = ${password}
 ### 3. migrate database schema
 Refer to flyway setup [documentation](https://flywaydb.org/documentation/), find all [migration schema](/src/main/resources/db/migration)
 ```
-mvn clean compile flyway:migrate -Ddatabase.url=XXX -Ddatabase.name=XXX -Ddatabase.user=XXX -Ddatabase.password=XXX 
+mvn clean compile flyway:migrate -Ddatabase.url=${DB_URL} -Ddatabase.name=XXX -Ddatabase.user=XXX -Ddatabase.password=XXX 
 ```
 ### 4. setup Logger level
 Refer to [document](https://logging.apache.org/log4j/2.x/manual/customloglevels.html)
