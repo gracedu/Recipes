@@ -37,6 +37,7 @@ public class UserDaoTest {
     public void init() {
        // userDao = new UserDaoImpl(); //new user
         user = new User();
+        user.setId(250L);
         user.setName("graceeeedu");
         user.setEmail("gracedjx@gmail.com");
         user.setPassword("1234");
