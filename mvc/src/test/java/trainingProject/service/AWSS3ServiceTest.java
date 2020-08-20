@@ -70,12 +70,12 @@ public class AWSS3ServiceTest {
                                           any(ByteArrayInputStream.class), any(ObjectMetadata.class));
     }
 
-    @Test
-    public void getFileUrlTest() {
-        String s3Key = "16fbb89d-6f98-4986-b362-afa4fa650983.txt";
-        awsS3Service.getFileUrl(s3Key);
-        verify(client, times(1)).getUrl(anyString(), anyString());
-    }
+//    @Test
+//    public void getFileUrlTest() {
+//        String s3Key = "16fbb89d-6f98-4986-b362-afa4fa650983.txt";
+//        awsS3Service.getFileUrl(s3Key);
+//        verify(client, times(1)).getUrl(anyString(), anyString());
+//    }
 
     @Test
     public void getObjectTest() {

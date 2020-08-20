@@ -167,10 +167,13 @@ public class UserDaoImpl implements UserDao {
             Query<User> query = session.createQuery(hql);
             query.setParameter("email", email.toLowerCase().trim());
             query.setParameter("password", password);
-            return query.uniqueResult();
+            User result = query.uniqueResult();
+            session.close();
+            return result;
         }
         catch (Exception e) {
             logger.error("can't find user based on given credential", e.getMessage());
+            session.close();
             return null;
         }
     }

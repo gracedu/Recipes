@@ -50,7 +50,7 @@ public class RoleDaoTest {
     public void findAllRolesTest() {
         List<Role> result = roleDao.findAllRoles();
         Assert.assertNotNull(result);
-        Assert.assertEquals(2, result.size());
+        Assert.assertEquals(5, result.size());
     }
 
     @Test
