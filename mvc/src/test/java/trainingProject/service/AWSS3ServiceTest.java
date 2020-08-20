@@ -21,15 +21,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.multipart.MultipartFile;
 import trainingProject.ApplicationBootstrap;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes= ApplicationBootstrap.class)
@@ -55,11 +53,11 @@ public class AWSS3ServiceTest {
 
     @Test
     public void uploadFileTest() throws IOException {
-        File file = new File("/Users/jinxiadu/Desktop/File1.txt");
-        FileInputStream input = new FileInputStream(file);
-        MultipartFile multipartFile = new MockMultipartFile("file",
-                file.getName(), "text/plain", IOUtils.toByteArray(input));
-
+//        File file = new File("/Users/jinxiadu/Desktop/File1.txt");
+//        FileInputStream input = new FileInputStream(file);
+        MultipartFile multipartFile = mock(MultipartFile.class);
+        when(multipartFile.getInputStream()).thenReturn(mock(InputStream.class));
+        when(multipartFile.getOriginalFilename()).thenReturn("testFileName");
         ObjectMetadata objectMetadata = new ObjectMetadata();
         objectMetadata.setContentType(multipartFile.getContentType());
         objectMetadata.setContentLength(multipartFile.getSize());
@@ -67,15 +65,16 @@ public class AWSS3ServiceTest {
         awsS3Service.uploadFile(multipartFile);
 
         verify(client, times(1)).putObject(anyString(), anyString(),
-                                          any(ByteArrayInputStream.class), any(ObjectMetadata.class));
+                                          any(InputStream.class), any(ObjectMetadata.class));
     }
 
-//    @Test
-//    public void getFileUrlTest() {
-//        String s3Key = "16fbb89d-6f98-4986-b362-afa4fa650983.txt";
-//        awsS3Service.getFileUrl(s3Key);
-//        verify(client, times(1)).getUrl(anyString(), anyString());
-//    }
+    @Test
+    public void getFileUrlTest() throws MalformedURLException {
+        String s3Key = "16fbb89d-6f98-4986-b362-afa4fa650983.txt";
+        when(client.getUrl(anyString(),anyString())).thenReturn(new URL("http","xxx",123,"xxx"));
+        awsS3Service.getFileUrl(s3Key);
+        verify(client, times(1)).getUrl(anyString(), anyString());
+    }
 
     @Test
     public void getObjectTest() {
