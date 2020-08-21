@@ -26,12 +26,13 @@ public class HibernateUtil {
                 String dbUrl = System.getProperty("database.url");
                 String dbUser = System.getProperty("database.user");
                 String dbPassword = System.getProperty("database.password");
+                String dbName = System.getProperty("database.name");
 
                 Configuration configuration = new Configuration();
                 Properties settings = new Properties();
                 settings.put(Environment.DRIVER, dbDriver);
                 settings.put(Environment.DIALECT, dbDialect);
-                settings.put(Environment.URL, dbUrl);
+                settings.put(Environment.URL, "jdbc:postgresql://" + dbUrl + ":5432/" + dbName);
                 settings.put(Environment.USER, dbUser);
                 settings.put(Environment.PASS, dbPassword);
                 settings.put(Environment.SHOW_SQL, "true");
