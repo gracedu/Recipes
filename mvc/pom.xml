@@ -155,9 +155,9 @@
           <version>6.0.4</version>
           <configuration>
             <driver>org.postgresql.Driver</driver>
-            <url>${database.url}</url>
-            <user>admin</user>
-            <password>password</password>
+            <url>jdbc:postgresql://${database.url}:5432/${database.name}</url>
+            <user>${database.user}</user>
+            <password>${database.password}</password>
             <schemas>
               <schema>public</schema>
             </schemas>
