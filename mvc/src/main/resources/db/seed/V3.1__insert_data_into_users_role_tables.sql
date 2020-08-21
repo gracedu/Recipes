@@ -1,4 +1,4 @@
-insert into role (id, name, allowed_resource, allowed_read, allowed_create, allowed_update, allowed_delete) values
+insert into role ( name, allowed_resource, allowed_read, allowed_create, allowed_update, allowed_delete) values
 (1, 'Admin', '/', 'Y', 'Y', 'Y', 'Y'),
 (2, 'Manager', '/depts,/departments,/employees,/ems,/acnts,/accounts', 'Y', 'Y', 'Y', 'N'),
 (3, 'user', '/employees,/ems,/acnts,/accounts', 'Y', 'N', 'N', 'N')

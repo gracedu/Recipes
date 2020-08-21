@@ -1,3 +1,9 @@
+DROP TABLE comments CASCADE;
+DROP TABLE users CASCADE;
+DROP TABLE recipes CASCADE;
+
+
+
 CREATE TABLE recipes (
 	id BIGSERIAL PRIMARY KEY,
 	name varchar NOT NULL,

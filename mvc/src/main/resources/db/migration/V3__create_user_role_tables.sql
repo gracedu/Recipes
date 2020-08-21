@@ -8,7 +8,7 @@ ADD COLUMN last_name VARCHAR(30);
 
 
 CREATE TABLE role (
-    id                   BIGSERIAL NOT NULL,
+    id                   BIGSERIAL,
     name                 VARCHAR(30) not null unique,
     allowed_resource     VARCHAR(200),
     allowed_read         boolean not null default false,
@@ -20,8 +20,8 @@ CREATE TABLE role (
 ALTER TABLE role ADD CONSTRAINT role_pk PRIMARY KEY ( id );
 
 CREATE TABLE users_role (
-    user_id    bigint NOT NULL,
-    role_id    bigint NOT NULL
+    user_id    BIGSERIAL,
+    role_id    BIGSERIAL
 );
 
 ALTER TABLE users_role

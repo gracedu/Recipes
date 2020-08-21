@@ -63,13 +63,13 @@ public class ImageDaoTest {
         recipeDao.save(recipe2);
 
         image1 = new Image();
-        image1.setId(1L); //it doesn't affect the database.
+        //image1.setId(1L); //it doesn't affect the database.
         image1.setTitle("photo of potato");
         image1.setRecipe(recipe1);
         imageDao.save(image1);
 
         image2 = new Image();
-        image2.setId(2L);
+       // image2.setId(2L);
         image2.setTitle("chicken's picture");
         image2.setRecipe(recipe2);
         imageDao.save(image2);

@@ -61,7 +61,7 @@ public class JWTServiceTest {
         Assert.assertEquals("zhangsan", claims.getSubject());
         Assert.assertEquals(String.valueOf(u.getId()), claims.getId());
         Assert.assertEquals("Jinxia", claims.getIssuer());
-        Assert.assertEquals("/recipes,/users,/comments", claims.get("allowedReadResources"));
+        Assert.assertEquals("/employees,/ems,/acnts,/accounts", claims.get("allowedReadResources"));
         Assert.assertEquals("", claims.get("allowedCreateResources"));
         Assert.assertEquals("", claims.get("allowedUpdateResources"));
         Assert.assertEquals("", claims.get("allowedDeleteResources"));

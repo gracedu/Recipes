@@ -14,6 +14,7 @@ import trainingProject.model.Recipe;
 import trainingProject.model.User;
 
 import java.util.Calendar;
+import java.util.UUID;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes= ApplicationBootstrap.class)
@@ -37,9 +38,9 @@ public class UserDaoTest {
     public void init() {
        // userDao = new UserDaoImpl(); //new user
         user = new User();
-        user.setId(250L);
-        user.setName("graceeeedu");
-        user.setEmail("gracedjx@gmail.com");
+       // user.setId(250L);
+        user.setName("graceeeedu"+ UUID.randomUUID());
+        user.setEmail("gracedjx@gmail.com"+UUID.randomUUID());
         user.setPassword("1234");
         userDao.save(user);
 
@@ -96,7 +97,7 @@ public class UserDaoTest {
 
     @Test
     public void getUsersTest() {
-        Assert.assertEquals(5, userDao.getUsers().size());
+        Assert.assertEquals(4, userDao.getUsers().size());
     }
 
 
