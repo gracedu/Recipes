@@ -18,7 +18,17 @@ public class UserService {
     private RoleService roleService;
 
     public User save(User user) {
-        user.addRole(roleService.getRoleByName("user")); //grant basic roles in service layer？
+//        if (roleService.getRoleByName("user") == null) {
+//            Role role = new Role();
+//            role.setName("user");
+//            role.setAllowedResource("/recipes,/comments,/images");
+//            role.setAllowedRead(true);
+//            role.setAllowedUpdate(true);
+//            role.setAllowedCreate(true);
+//            role.setAllowedDelete(true);
+//            roleService.save(role);
+//        }
+//        user.addRole(roleService.getRoleByName("user"));
         return userDao.save(user);
     }
     public List<User> getUsers() {

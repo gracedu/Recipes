@@ -11,7 +11,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import trainingProject.model.Role;
 import trainingProject.model.User;
+import trainingProject.service.RoleService;
 import trainingProject.util.HibernateUtil;
 
 import javax.transaction.Transactional;
@@ -23,6 +25,8 @@ public class UserDaoImpl implements UserDao {
     private Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
     private SessionFactory sessionFactory;
+    @Autowired
+    private RoleService roleService;
 
     @Override
     public User save(User user) {
@@ -30,6 +34,17 @@ public class UserDaoImpl implements UserDao {
         Session session = sessionFactory.openSession();
         try {
             transaction = session.beginTransaction();
+            if (roleService.getRoleByName("user") == null) {
+                Role role = new Role();
+                role.setName("user");
+                role.setAllowedResource("/recipes,/comments,/images");
+                role.setAllowedRead(true);
+                role.setAllowedUpdate(true);
+                role.setAllowedCreate(true);
+                role.setAllowedDelete(true);
+                roleService.save(role);
+            }
+            user.addRole(roleService.getRoleByName("user"));
             session.save(user);
             transaction.commit();
             session.close();

@@ -97,7 +97,7 @@ public class UserDaoTest {
 
     @Test
     public void getUsersTest() {
-        Assert.assertEquals(4, userDao.getUsers().size());
+        Assert.assertEquals(1, userDao.getUsers().size());
     }
 
 

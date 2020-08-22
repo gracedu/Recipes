@@ -55,6 +55,6 @@ public class RoleServiceTest {
     @Test
     public void getAllRolesTest() {
         List<Role> result = roleService.getAllRoles();
-        Assert.assertEquals(5, result.size());
+        Assert.assertEquals(3, result.size());
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import trainingProject.ApplicationBootstrap;
 import trainingProject.model.Role;
+import trainingProject.model.User;
 
 import java.util.List;
 
@@ -21,8 +22,18 @@ public class RoleDaoTest {
     private Role r1;
     private Role r2;
 
+    @Autowired
+    private UserDao userDao;
+    private User u1;
+
     @Before
     public void init() {
+        u1 = new User();
+        u1.setName("henry");
+        u1.setEmail("hen@gmail.com");
+        u1.setPassword("1234");
+        userDao.save(u1);
+
         r1 = new Role();
         r1.setName("King");
         r1.setAllowedCreate(true);
@@ -44,13 +55,15 @@ public class RoleDaoTest {
     public void tearDown() {
         roleDao.delete(r1);
         roleDao.delete(r2);
+        userDao.delete(u1);
     }
 
     @Test
     public void findAllRolesTest() {
         List<Role> result = roleDao.findAllRoles();
         Assert.assertNotNull(result);
-        Assert.assertEquals(5, result.size());
+        Assert.assertEquals("[user]", u1.getRoles().toString());
+        Assert.assertEquals(3, result.size());
     }
 
     @Test

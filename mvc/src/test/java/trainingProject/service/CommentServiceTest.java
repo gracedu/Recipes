@@ -33,6 +33,34 @@ public class CommentServiceTest {
     private Recipe recipe1;
     private Recipe recipe2;
 
+//    public static void main(String[] args) {
+//        UserService userService = new UserService();
+//        RecipeService recipeService = new RecipeService();
+//        CommentService commentService = new CommentService();
+//        Comment comment1;
+//        User user;
+//        Recipe recipe1;
+//        user = new User("Meow", "meow@gmail.com", "abcd");
+//        userService.save(user);
+//        recipe1 = new Recipe();
+//        recipe1.setCreationDate(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
+//        recipe1.setCuisine("Greek");
+//        recipe1.setDescription("roast chicken in the oven");
+//        recipe1.setIngredient("parsely, chicken, salt, pepper");
+//        recipe1.setName("Greek style roast chicken");
+//        recipe1.setUser(user);
+//        recipeService.save(recipe1);
+//        comment1 = new Comment();
+//        comment1.setContent("GOOD");
+//        comment1.setUser(user);
+//        comment1.setRecipe(recipe1);
+//        commentService.save(comment1);
+//
+//        commentService.delete(comment1);
+//        recipeService.delete(recipe1);
+//        userService.delete(user);
+//    }
+
     @Before
     public void setup() {
         //userDao = new UserDaoImpl();
