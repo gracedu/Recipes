@@ -4,7 +4,7 @@ export JAVA_OPTS="$JAVA_OPTS -Ddatabase.dialect=org.hibernate.dialect.PostgreSQL
 export JAVA_OPTS="$JAVA_OPTS -Ddatabase.url=jdbc:postgresql://${DB_URL}:5432/${DB_NAME}"
 export JAVA_OPTS="$JAVA_OPTS -Ddatabase.user=${DB_USER}"
 export JAVA_OPTS="$JAVA_OPTS -Ddatabase.password=${DB_PASSWORD}"
-export JAVA_OPTS="$JAVA_OPTS -Daws.queue.name=recipe-standard-queue"
+export JAVA_OPTS="$JAVA_OPTS -Daws.queue.name=${QUEUE}"
 export JAVA_OPTS="$JAVA_OPTS -Daws.region=us-east-1"
 export JAVA_OPTS="$JAVA_OPTS -Dspring.profiles.active=dev"
 export JAVA_OPTS="$JAVA_OPTS -Dorg.slf4j.simpleLogger.defaultLogLevel=debug"
