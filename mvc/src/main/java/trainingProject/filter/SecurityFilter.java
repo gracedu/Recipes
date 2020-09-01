@@ -54,8 +54,8 @@ public class SecurityFilter implements Filter {
         int statusCode = HttpServletResponse.SC_UNAUTHORIZED;
         String uri = req.getRequestURI();
         String verb = req.getMethod();
-        if (uri.equalsIgnoreCase(AUTH_URI)) return HttpServletResponse.SC_ACCEPTED;
-        if (uri.equalsIgnoreCase(SIGNUP_URI)) return HttpServletResponse.SC_ACCEPTED;
+
+        if (uri.equalsIgnoreCase(AUTH_URI) || uri.equalsIgnoreCase(SIGNUP_URI)) return HttpServletResponse.SC_ACCEPTED;
 
         try {
             String token = req.getHeader("Authorization").replaceAll("^(.*?) ", "");
