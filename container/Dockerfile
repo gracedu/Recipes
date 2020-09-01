@@ -7,8 +7,8 @@ ENV DB_NAME = ""
 ENV DB_USER = ""
 ENV DB_PASSWORD = ""
 
-RUN rm -rf /usr/local/Cellar/tomcat/webapps/ROOT
+RUN rm -rf /usr/local/tomcat/webapps/ROOT
 
-COPY ./*.war /usr/local/Cellar/tomcat/webapps/ROOT.war
+COPY ./*.war /usr/local/tomcat/webapps/ROOT.war
 
-COPY ./setenv.sh /usr/local/Cellar/tomcat/bin/setenv.sh
+COPY ./setenv.sh /usr/local/tomcat/bin/setenv.sh
