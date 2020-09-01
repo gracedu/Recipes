@@ -23,6 +23,7 @@ public class SecurityFilter implements Filter {
     private UserService userService;
     private Logger logger = LoggerFactory.getLogger(getClass());
     private static String AUTH_URI = "/auth";
+    private static String SIGNUP_URI = "/auth/signup";
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -54,6 +55,7 @@ public class SecurityFilter implements Filter {
         String uri = req.getRequestURI();
         String verb = req.getMethod();
         if (uri.equalsIgnoreCase(AUTH_URI)) return HttpServletResponse.SC_ACCEPTED;
+        if (uri.equalsIgnoreCase(SIGNUP_URI)) return HttpServletResponse.SC_ACCEPTED;
 
         try {
             String token = req.getHeader("Authorization").replaceAll("^(.*?) ", "");

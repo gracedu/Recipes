@@ -24,6 +24,7 @@ public class AuthController {
     Logger logger = LoggerFactory.getLogger(getClass());
     private String errorMsg = "The email or password is not correct";
 
+    //user login
     // 1. validate user exist in database and verify password
     // 2. generate JWToken
     // 3. return token
@@ -53,5 +54,14 @@ public class AuthController {
             return  ResponseEntity.status(HttpServletResponse.SC_BAD_REQUEST).body(result);
         }
         return ResponseEntity.status(HttpServletResponse.SC_OK).body(result);
+    }
+
+    //user signup
+    // /auth/signup POST
+    @RequestMapping(value = "/signup", method = RequestMethod.POST)
+    public User create(@RequestBody User user) {
+        logger.debug(user.toString());
+        User u = userService.save(user);
+        return u;
     }
 }

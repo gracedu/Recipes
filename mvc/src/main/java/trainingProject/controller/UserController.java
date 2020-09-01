@@ -47,7 +47,6 @@ public class UserController {
         return u;
     }
 
-    //user signup
     // /user POST
     @RequestMapping(value = "", method = RequestMethod.POST)
     public User create(@RequestBody User newUser) {
