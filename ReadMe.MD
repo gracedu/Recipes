@@ -71,4 +71,7 @@ Refer to [document](https://logging.apache.org/log4j/2.x/manual/customloglevels.
 ```
 logging.level.${projectFolderName}=${level}
 ```
+### 5. AWS configuration
+```
+```
 
