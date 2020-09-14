@@ -54,6 +54,7 @@ docker pull postgres
 docker run --name training-db -e POSTGRES_USER=${username} -e POSTGRES_PASSWORD=${password} -e POSTGRES_DB=${databaseName} -p 5431:5432 -d postgres
 ```
 ### 2. database configuration
+Pass the following through VM options. 
 ```
 database.driver = ${driverName}
 database.dialect = ${dialect}
@@ -68,10 +69,41 @@ mvn clean compile flyway:migrate -Ddatabase.url=${DB_URL} -Ddatabase.name=${DB_N
 ```
 ### 4. setup Logger level
 Refer to [document](https://logging.apache.org/log4j/2.x/manual/customloglevels.html)
+Pass this through VM options.
 ```
 logging.level.${projectFolderName}=${level}
 ```
 ### 5. AWS configuration
+Pass the following through VM options. 
 ```
+-Daws.accessKeyId=${accessKeyId}
+-Daws.secretKey=${secretKey}
+-Daws.region=${region}
+-Daws.s3.bucket=${bucketName}
+-Daws.queue.name=${queueName}
+```
+Note: We use AWS SQS(Simple Queue Service) to implement Java JMS. And AWS S3 is used to store files and pictures.
+
+### 6. Profile
+This project uses Mockito to simulate the behavior of AWS during testing. So we need different profile for deployment and testing.
+```
+spring.profiles.active=${profile}
 ```
 
+## Deploy Application to Production
+1. Compile the project.
+2. Run tests.
+    ```
+    mvn clean compile flyway:migrate -Ddatabase.driver=${driverName} -Ddatabase.dialect=${dialect} -Ddatabase.url=${databaseURL} -Ddatabase.name=${databaseName} -Ddatabase.user=${userName} -Ddatabase.password=${password} -Ddatabase.port=${dbPortNumber}
+    ```
+    ```
+    mvn clean compile test -Ddatabase.driver=${driverName} -Ddatabase.dialect=${dialect} -Ddatabase.url=${databaseURL} -Ddatabase.name=${databaseName} -Ddatabase.user=${userName} -Ddatabase.password=${password} -Ddatabase.port=${dbPortNumber} -Daws.region=${region} -Dspring.profiles.active=${profile} -Dorg.slf4j.simpleLogger.defaultLogLevel=${level} -Dsecret.key=${secretKey} -Dissuer=${issuer} -Daws.s3.bucket=${bucketName} -Daws.queue.name=${queueName} -q
+    ```
+3. Make the project a war package.
+    ```
+    mvn compile package -DskipTests=true -q
+    ```
+4. Deploy this project on Tomcat Server.
+
+For this project, I actually cooperated with a DevOps Engineer to containerize the project and push it to server.
+In order to do this, I have a Dockerfile and setenv.sh in the container directory.
